@@ -13,13 +13,23 @@ router.get('/', (req, res) => {
   res.send("probando la ruta /videogames")
 });
 
-// GET /videogame/{idVideogame}:
-// OBTENER EL DETALLE DE UN VIDEOJUEGO particular. Solo traer los datos pedidos en la ruta de DETALLE de videojuego
-// incluir los generos asociados
-
 // POST /videogames
 // CREA UN VIDEOJUEGO en la base de datos, relacionado a sus generos
 // recibe por body los datos recolectados desde el formulario (de la ruta de )
+router.post('/', (req, res) => {
+  console.log(req.body);
+  const {detail} = req.body
+  res.send(`Este es el videjuego creado en el form ${detail}`)
+});
 
+// GET /videogame/{idVideogame}:
+// OBTENER EL DETALLE DE UN VIDEOJUEGO particular. Solo traer los datos pedidos en la ruta de DETALLE de videojuego
+// incluir los generos asociados
+router.get('/:id', (req, res) => {
+
+  console.log(req.params);
+  const {id} = req.params
+  res.send(`Este es el videjuego con id: ${id}`)
+});
 
 module.exports = router;
