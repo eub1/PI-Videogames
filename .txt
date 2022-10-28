@@ -1,1 +1,0 @@
-https://api.rawg.io/api/genres?key=02923267e5a64f8ea56f40a86bd1fef2

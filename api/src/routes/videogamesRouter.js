@@ -1,5 +1,6 @@
 const express = require("express");
-const getVideogames = require('../controllers/getVideogames.js')
+const getVideogames = require('../controllers/getVideogames.js');
+const { Videogame } = require("../db");
 
 const router = express.Router();
 
@@ -12,30 +13,48 @@ const router = express.Router();
 
 // la ruta llamar al controlador, el controlador le deja todo listo para que la ruta haga res.send
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
   try {
     const {name} = req.query;
     if(name){
       res.send(`'Estas buscando al videogame ${name}`)
     } else {
-      const videogames = getVideogames();
+      const videogames = await getVideogames();
       console.log(videogames);
       res.send(videogames);
     }
   } catch (error) {
-    res.send({error: error.message});
+    res.send(error.message);
   }
 
 });
 
+/* 
+videogames:
+[ { key: 3498 }, { key: 3328 }, { key: 4200 }, { key: 5286 }, { key: 4291 }, { key: 5679 }, { key: 12020 }, { key: 13536 }, { key: 4062 }, { key: 3439 }, { key: 802 }, { key: 28 }, { key: 13537 }, { key: 4286 }, { key: 1030 }, { key: 2454 }, { key: 3070 }, { key: 32 }, { key: 58175 }, { key: 11859 } ]
+*/
+
 // POST /videogames
-// CREA UN VIDEOJUEGO en la base de datos, relacionado a sus generos
+// CREA UN VIDEOJUEGO en la base de datos, //! relacionado a sus generos
 // recibe por body los datos recolectados desde el formulario (de la ruta de )
-//json  {"nombre": "Tetris", "descripcion": "rompecabeza", "fecha": "16/10/2022", "rating": 5, "generos": "trivial", "plataformas": "varias"}
-router.post('/', (req, res) => {
-  console.log(req.body);
-  const {nombre, descripcion, fecha, generos, plataformas} = req.body
-  res.send(`Este es el videjuego creado en el form ${nombre} ${descripcion} ${fecha} ${generos} ${plataformas}`)
+
+router.post('/', async (req, res) => {
+  // console.log(req.body);
+  const {name, description, released, rating} = req.body
+ 
+  try {
+
+    if (!name || !description) {
+      return res.status(404).send("Falta enviar datos obligatorios");
+    }
+
+    const newVideogame = await Videogame.create({name, description});
+    res.status(200).send(newVideogame);
+
+  } catch (error) {
+    console.log(`Error en ruta POST '/'. ${error.message}`);
+    return res.status(404).send(error);
+  }
 });
 
 // GET /videogame/{idVideogame}:
