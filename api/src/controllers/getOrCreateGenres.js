@@ -8,34 +8,21 @@ const {
  //Obtener todos los tipos de géneros de videojuegos posibles, si no lo encuentra, crearlo
 const getOrCreateGenres = async () => {
 
-  const apiGenres = await axios.get(`https://api.rawg.io/api/genres?key=${RAWG_API_KEY}`);
+  const fetchedApiGenres = await axios.get(`https://api.rawg.io/api/genres?key=${RAWG_API_KEY}`);
   const setGenres = new Set()
-  apiGenres.data?.results?.map( g => setGenres.add(g.name))
+  fetchedApiGenres.data?.results?.map( g => setGenres.add(g.name))
 
-  const genresNames = [...setGenres].sort()
-  console.log(Array.isArray(genresNames));
-  // const newArray = []
-  // let name = ""
-
-  // for(let i = 0; i <= genresNames.length; i++)
-  //  {
-  //    name = genresNames[i]
-  //   const [genre, created] = await Genre.findOrCreate({
-  //     where: {name},
-  //     defaults: {
-  //       name
-  //     }
-  //   })
-
-  //   if(!created) newArray.push(genre)
-    
-  //   }
+  const genresNamesArray = [...setGenres].sort()
+  
+  const promisesArrayCreateFindGenresNames = genresNamesArray.map( genero => 
+    Genre.findOrCreate({ where: {name: genero}}))
+  
+  const arrayFoundCreatedGenres = await Promise.all(promisesArrayCreateFindGenresNames);
  
-  genresNames.forEach( genero => Genre.findOrCreate({where: genero}));
-
-  let getGenres = await Genre.findAll()
-
-  return getGenres;
+  const fetchedDbGenresNames = []
+  arrayFoundCreatedGenres.forEach( item => fetchedDbGenresNames.push(item[0].dataValues.name))
+  
+  return fetchedDbGenresNames;
 
 };
 
