@@ -7,7 +7,7 @@ const {
 } = process.env;
 
 
-const getAllVideogames = async () => {
+const getApiVideogames = async () => {
 
   const api100 = [];
   for ( let i = 0; i < 5 ; i++ ) {
@@ -26,10 +26,13 @@ const getAllVideogames = async () => {
   };
   const apiVideogames = api100.flat()
 
-  // console.log(apiVideogames.length);
+  return apiVideogames;
 
+};
+
+const getDbVideogames = async () => {
   const dbVideogames = await Videogame.findAll({
-    attributes: ['id', 'name', 'released', 'rating'],
+    // attributes: ['id', 'name', 'released', 'rating'],
     include: {
       model: Genre,
       attributes: ["name"],
@@ -48,11 +51,14 @@ const getAllVideogames = async () => {
     }
   })
 
-  // console.log(fetchedDBVideogames, "dbVideogames");
+  return fetchedDBVideogames;
+}
 
-  return [...apiVideogames, ...fetchedDBVideogames];
+const getAllVideogames = async() => {
 
-};
-
+  const promisesAllVideogames = [getApiVideogames(), getDbVideogames()]
+  const arrayOfAllVideogames = await Promise.all(promisesAllVideogames)
+  return arrayOfAllVideogames
+}
 
 module.exports = getAllVideogames;
