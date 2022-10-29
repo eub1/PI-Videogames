@@ -1,5 +1,7 @@
 const express = require("express");
-const getVideogames = require('../controllers/getVideogames.js');
+const createVideogame = require('../controllers/createVideogame.js');
+const getAllVideogames = require('../controllers/getAllVideogames.js');
+const getVideogamesByName = require('../controllers/getVideogamesByName.js');
 const { Videogame } = require("../db");
 
 const router = express.Router();
@@ -17,10 +19,12 @@ router.get('/', async(req, res) => {
   try {
     const {name} = req.query;
     if(name){
-      res.send(`'Estas buscando al videogame ${name}`)
+      const videogames = await getVideogamesByName(name);
+      // console.log(videogames);
+      res.send(videogames);
     } else {
-      const videogames = await getVideogames();
-      console.log(videogames);
+      const videogames = await getAllVideogames();
+      // console.log(videogames.length);
       res.send(videogames);
     }
   } catch (error) {
@@ -29,27 +33,23 @@ router.get('/', async(req, res) => {
 
 });
 
-/* 
-videogames:
-[ { key: 3498 }, { key: 3328 }, { key: 4200 }, { key: 5286 }, { key: 4291 }, { key: 5679 }, { key: 12020 }, { key: 13536 }, { key: 4062 }, { key: 3439 }, { key: 802 }, { key: 28 }, { key: 13537 }, { key: 4286 }, { key: 1030 }, { key: 2454 }, { key: 3070 }, { key: 32 }, { key: 58175 }, { key: 11859 } ]
-*/
-
 // POST /videogames
 // CREA UN VIDEOJUEGO en la base de datos, //! relacionado a sus generos
 // recibe por body los datos recolectados desde el formulario (de la ruta de )
 
 router.post('/', async (req, res) => {
   // console.log(req.body);
-  const {name, description, released, rating} = req.body
+  const {name, description, released, rating, platforms, genres} = req.body
  
   try {
 
-    if (!name || !description) {
+    if (!name || !description ) {
       return res.status(404).send("Falta enviar datos obligatorios");
     }
 
-    const newVideogame = await Videogame.create({name, description});
-    res.status(200).send(newVideogame);
+    const createdVideogame = await createVideogame(name, description, released, rating, platforms, genres);
+    console.log(createdVideogame, "createdVideogame en POST '/' ");
+    res.status(200).send( createdVideogame );
 
   } catch (error) {
     console.log(`Error en ruta POST '/'. ${error.message}`);

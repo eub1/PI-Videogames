@@ -36,7 +36,7 @@ const { Videogame, Genre } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-//! las asocianes crashea a nodemon
+
 Videogame.belongsToMany(Genre, {through: "videogameGenre"});
 Genre.belongsToMany(Videogame, {through: "videogameGenre"}); 
 
