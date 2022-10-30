@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(()=>{
     dispatch(getAllVideogames()) //component did mount, al montar, despacha esta accion
-  },[dispatch]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
+  },[]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
 
   function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
     e.preventDefault();
