@@ -21,13 +21,11 @@ router.get('/', async(req, res) => {
     const {name} = req.query;
     if(name){
       const byNameVideogames = await getByNameVideogames(name);
-      byNameVideogames
-      console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
-      res.status(200).send(byNameVideogames);
+         // console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
+      if(byNameVideogames.length) {return res.status(200).send(byNameVideogames)}  
     } else {
       const videogames = await getAllVideogames();
-      // console.log(videogames.length);
-      res.send(videogames);
+      res.status(200).send(videogames);
     }
   } catch (error) {
     res.send(error.message);

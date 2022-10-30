@@ -66,13 +66,16 @@ const getByNameVideogames = async(name) => {
 
   const promises = [ getByNameDbVideogames(name), getByNameApiVideogames(name)]
   const arrayOfMatchedVideogames = await Promise.all(promises)
+  console.log("arrayOfMatchedVideogames", arrayOfMatchedVideogames);
   const flattenedArray = [ ...arrayOfMatchedVideogames[0].flat(), ...arrayOfMatchedVideogames[1]].flat()
   const get15FirstArray = [];
   for(let i=0; i <= 14; i++){
     get15FirstArray.push(flattenedArray[i])
   }
 
-  return get15FirstArray;
+  if(get15FirstArray[0] !== null){ return get15FirstArray }
+
+ throw new Error(`El ${name} no existe, puede crear uno nuevo en la sección de Crear Videojuego`)
 }
 
 module.exports = getByNameVideogames;
