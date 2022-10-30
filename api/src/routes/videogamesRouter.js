@@ -68,7 +68,7 @@ router.post('/', async (req, res) => {
  
   try {
 
-    if (!name || !description ) {
+    if (!name || !description || !platforms) {
       return res.status(404).send("Falta enviar datos obligatorios");
     }
 
