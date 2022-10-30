@@ -32,7 +32,7 @@ const createVideogame = async (name, description, released, rating, platforms, g
     },
   })
   
-  console.log(newVideogame, "soy el nuevo videojuego creado en controller createVideogame");
+  // console.log(newVideogame, "soy el nuevo videojuego creado en controller createVideogame");
   return newVideogame;
 
 };

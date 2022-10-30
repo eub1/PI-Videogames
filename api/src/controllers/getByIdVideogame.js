@@ -25,7 +25,7 @@ const getApiIdVideogame = async (id) => {
       genre: fetchedData.data.genres?.map((genero) => genero.name)
     }
   
-  console.log(foundVideogame, "foundVideogame");
+  // console.log(foundVideogame, "foundVideogame");
 
   return foundVideogame;
 
@@ -41,17 +41,8 @@ const getDbIdVideogame = async (id) => {
       },
     },
   });
-  // const fetchedDBVideogame = dbVideogame?.map(el => {
-  //   return {
-  //     id: el.id,
-  //     name: el.name,
-  //     released: el.released,
-  //     rating: el.rating,
-  //     genres: el.genres?.map((genero) => genero.name)
-  //   }
-  // })
 
-  console.log(dbVideogame, "dbgames");
+  // console.log(dbVideogame, "dbgames");
 
   return dbVideogame;
 }
