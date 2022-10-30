@@ -6,7 +6,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 
 
-export const getVideogames = () =>{
+export const getAllVideogames = () =>{
   return function (dispatch){
     axios
     .get("http://localhost:3001/videogames")
@@ -29,7 +29,7 @@ export const getGenres = () => {
 export const getVideogameDetail = (id) => {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/videogames/${id}`)
+      .get(`http://localhost:3001/videogame/${id}`)
       .then((resp) => dispatch({ type: GET_VIDEOGAME_DETAIL, payload: resp.data }))
       .catch((error) => console.log(error));
   };
