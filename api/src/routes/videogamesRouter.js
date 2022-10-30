@@ -2,6 +2,7 @@ const express = require("express");
 const createVideogame = require('../controllers/createVideogame.js');
 const getAllVideogames = require('../controllers/getAllVideogames.js');
 const getVideogamebyId = require('../controllers/getByIdVideogame.js')
+const getByNameVideogames = require('../controllers/getByNameVideogames.js')
 const { Videogame } = require("../db");
 
 const router = express.Router();
@@ -15,48 +16,50 @@ const router = express.Router();
 
 // la ruta llamar al controlador, el controlador le deja todo listo para que la ruta haga res.send
 
-// router.get('/', async(req, res) => {
-//   try {
-//     const {name} = req.query;
-//     if(name){
-//       const videogames = await getVideogamesByName(name);
-//       // console.log(videogames);
-//       res.send(videogames);
-//     } else {
-//       const videogames = await getAllVideogames();
-//       // console.log(videogames.length);
-//       res.send(videogames);
-//     }
-//   } catch (error) {
-//     res.send(error.message);
-//   }
-
-// });
-
-
 router.get('/', async(req, res) => {
   try {
     const {name} = req.query;
-    const videogames = await getAllVideogames();
-     console.log(videogames[1].length);
-    if(name) {
-      if(!videogames[1].length){ // al principio no tengo nada en la DB
-        const videogamesByName = await videogames[0].filter(el => el.name?.toLowerCase().includes(name?.toLowerCase()));
-        videogamesByName?.length ? res.status(200).send(videogamesByName) : res.status(404).send("No se encontraron videojuegos con ese nombre")
-      } else {
-      const videogamesByName = await videogames?.filter(el => el.name?.toLowerCase().includes(name?.toLowerCase()));
-      videogamesByName?.length ? res.status(200).send(videogamesByName) : res.status(404).send("No se encontraron videojuegos con ese nombre")
-    }} else {
-
-      res.status(200).send(videogames)
+    if(name){
+      const byNameVideogames = await getByNameVideogames(name);
+      byNameVideogames
+      console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
+      res.status(200).send(byNameVideogames);
+    } else {
+      const videogames = await getAllVideogames();
+      // console.log(videogames.length);
+      res.send(videogames);
     }
-  
   } catch (error) {
-
     res.send(error.message);
   }
 
 });
+
+
+// router.get('/', async(req, res) => {
+//   try {
+//     const {name} = req.query;
+//     const videogames = await getAllVideogames();
+//      console.log(videogames[1].length);
+//     if(name) {
+//       if(!videogames[1].length){ // al principio no tengo nada en la DB
+//         const videogamesByName = await videogames[0].filter(el => el.name?.toLowerCase().includes(name?.toLowerCase()));
+//         videogamesByName?.length ? res.status(200).send(videogamesByName) : res.status(404).send("No se encontraron videojuegos con ese nombre")
+//       } else {
+//       const videogamesByName = await videogames?.filter(el => el.name?.toLowerCase().includes(name?.toLowerCase()));
+//       console.log(videogamesByName);
+//       videogamesByName?.length ? res.status(200).send(videogamesByName) : res.status(404).send("No se encontraron videojuegos con ese nombre")
+//     }} else {
+
+//       res.status(200).send(videogames)
+//     }
+  
+//   } catch (error) {
+
+//     res.send(error.message);
+//   }
+
+// });
 
 // POST /videogames
 // CREA UN VIDEOJUEGO en la base de datos, //! relacionado a sus generos
