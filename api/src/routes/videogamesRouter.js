@@ -36,31 +36,6 @@ router.get('/', async(req, res) => {
 });
 
 
-// router.get('/', async(req, res) => {
-//   try {
-//     const {name} = req.query;
-//     const videogames = await getAllVideogames();
-//      console.log(videogames[1].length);
-//     if(name) {
-//       if(!videogames[1].length){ // al principio no tengo nada en la DB
-//         const videogamesByName = await videogames[0].filter(el => el.name?.toLowerCase().includes(name?.toLowerCase()));
-//         videogamesByName?.length ? res.status(200).send(videogamesByName) : res.status(404).send("No se encontraron videojuegos con ese nombre")
-//       } else {
-//       const videogamesByName = await videogames?.filter(el => el.name?.toLowerCase().includes(name?.toLowerCase()));
-//       console.log(videogamesByName);
-//       videogamesByName?.length ? res.status(200).send(videogamesByName) : res.status(404).send("No se encontraron videojuegos con ese nombre")
-//     }} else {
-
-//       res.status(200).send(videogames)
-//     }
-  
-//   } catch (error) {
-
-//     res.send(error.message);
-//   }
-
-// });
-
 // POST /videogames
 // CREA UN VIDEOJUEGO en la base de datos, //! relacionado a sus generos
 // recibe por body los datos recolectados desde el formulario (de la ruta de )
