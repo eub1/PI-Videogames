@@ -18,9 +18,22 @@ const createVideogame = async (name, description, released, rating, platforms, g
   })
  
   await formVideogame.addGenres(foundGenres);
+
+  const newVideogame = await Videogame.findOne({
+    where: {
+      name: name,
+    },
+    include: {
+      model: Genre,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+  })
   
-  // console.log(formVideogame.dataValues, "soy el nuevo videojuego creado en controller createVideogame");
-  return formVideogame.dataValues;
+  console.log(newVideogame, "soy el nuevo videojuego creado en controller createVideogame");
+  return newVideogame;
 
 };
 

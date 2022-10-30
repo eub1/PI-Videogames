@@ -1,7 +1,7 @@
 const express = require("express");
 const createVideogame = require('../controllers/createVideogame.js');
 const getAllVideogames = require('../controllers/getAllVideogames.js');
-
+const getVideogamebyId = require('../controllers/getByIdVideogame.js')
 const { Videogame } = require("../db");
 
 const router = express.Router();
@@ -73,8 +73,8 @@ router.post('/', async (req, res) => {
     }
 
     const createdVideogame = await createVideogame(name, description, released, rating, platforms, genres);
-    console.log(createdVideogame, "createdVideogame en POST '/' ");
-    res.status(200).send( createdVideogame );
+    console.log("createdVideogame en POST '/' ");
+    res.status(201).send( createdVideogame );
 
   } catch (error) {
     console.log(`Error en ruta POST '/'. ${error.message}`);
@@ -86,11 +86,19 @@ router.post('/', async (req, res) => {
 // OBTENER EL DETALLE DE UN VIDEOJUEGO particular. Solo traer los datos pedidos en la ruta de DETALLE de videojuego
 // incluir los generos asociados
 
-router.get('/:id', (req, res) => {
 
-  console.log(req.params);
+router.get('/:id', async (req, res) => {
+
+try {
+  // console.log(req.params);
   const {id} = req.params
-  res.send(`Este es el videjuego con id: ${id}`)
+  if(!id){ throw new Error(`Debe indicar un id para poder encontrar el Videojuego`)}
+  const videogameById = await  getVideogamebyId(id)
+  res.status(200).send(videogameById)
+  
+} catch (error) {
+  res.send(error.message)
+}
 });
 
 module.exports = router;
