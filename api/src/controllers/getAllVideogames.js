@@ -51,6 +51,8 @@ const getDbVideogames = async () => {
     }
   })
 
+  // console.log(fetchedDBVideogames, "dbgames");
+
   return fetchedDBVideogames;
 }
 
@@ -58,6 +60,7 @@ const getAllVideogames = async() => {
 
   const promisesAllVideogames = [getApiVideogames(), getDbVideogames()]
   const arrayOfAllVideogames = await Promise.all(promisesAllVideogames)
+
   return arrayOfAllVideogames
 }
 

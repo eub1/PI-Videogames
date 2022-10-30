@@ -9,11 +9,18 @@ const {
 
 const createVideogame = async (name, description, released, rating, platforms, genres) => {
 
-  const newVideogame = await Videogame.create({name, description, released, rating, platforms});
+  const formVideogame = await Videogame.create({name, description, released, rating, platforms});
 
-  await newVideogame.addGenres(genres);
-  console.log(newVideogame.dataValues, "soy el nuevo videojuego creado en controller createVideogame");
-  return newVideogame.dataValues;
+  const foundGenres = await Genre.findAll({
+    where:{
+      id: genres
+    }
+  })
+ 
+  await formVideogame.addGenres(foundGenres);
+  
+  // console.log(formVideogame.dataValues, "soy el nuevo videojuego creado en controller createVideogame");
+  return formVideogame.dataValues;
 
 };
 

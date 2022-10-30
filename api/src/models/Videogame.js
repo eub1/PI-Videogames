@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     description: {
       type: DataTypes.TEXT,
@@ -28,7 +29,7 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
     },
     platforms: {
-      type: DataTypes.ARRAY(DataTypes.JSON),
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull: false,
     },
   },
