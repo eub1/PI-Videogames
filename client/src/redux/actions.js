@@ -6,7 +6,6 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 
 
 
-
 export const getVideogames = () =>{
   return function (dispatch){
     axios
