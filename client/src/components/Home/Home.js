@@ -8,12 +8,12 @@ import VideogameCard from '../VideogameCard/VideogameCard'
 
 const Home = () => {
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames) // mapStateToProps (trae todo lo que esta en el estado de videogames)
 
   useEffect(()=>{
     dispatch(getAllVideogames()) //component did mount, al montar, despacha esta accion
-  },[]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
+  },[dispatch]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
 
   function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
     e.preventDefault();
@@ -24,7 +24,7 @@ const Home = () => {
     <>
       <Link to='/videogames'>Create New Videogame</Link>
       <h1 key="title1">PAGE TITLE: Im in Home</h1>
-      <button onClick={e=>{handleClick(e)}}>Reload Videogames</button>
+      <button onClick={handleClick}>Reload Videogames</button>
       <div>
         <div>
         <select name="asc/desc" id="select1" key="select1">
@@ -64,7 +64,7 @@ const Home = () => {
         {
           allVideogames?.map( videogame => {
             return (
-            <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre}/>
+            <VideogameCard  name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={videogame.id}/>
             );
           })
         }
