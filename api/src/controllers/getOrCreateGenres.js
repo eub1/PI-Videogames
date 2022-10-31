@@ -20,7 +20,7 @@ const getOrCreateGenres = async () => {
   const arrayFoundCreatedGenres = await Promise.all(promisesArrayCreateFindGenresNames);
  
   const fetchedDbGenresNames = []
-  arrayFoundCreatedGenres.forEach( item => fetchedDbGenresNames.push(item[0].dataValues.name))
+  arrayFoundCreatedGenres.forEach( item => fetchedDbGenresNames.push({id: item[0].dataValues.id, name: item[0].dataValues.name}))
   
   return fetchedDbGenresNames;
 
