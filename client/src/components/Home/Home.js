@@ -56,7 +56,11 @@ const Home = () => {
         {
           allVideogames?.map( videogame => {
             return (
-            <VideogameCard  name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={Math.random()} id={videogame.id}/>
+              <div>
+                <Link to={/videogame/}>
+                  <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={Math.random()} id={videogame.id}/>
+                </Link>
+              </div>
             );
           })
         }
