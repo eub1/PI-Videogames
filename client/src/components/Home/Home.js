@@ -22,10 +22,6 @@ const Home = () => {
     e.preventDefault();
     dispatch(getAllVideogames());
   }
-  function handleSelect(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
-    e.preventDefault();
-    
-  }
 
   return (
     <>
