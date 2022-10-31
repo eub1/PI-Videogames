@@ -3,7 +3,8 @@ import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllVideogames, getGenres } from '../../redux/actions';
 import {Link} from 'react-router-dom';
-import VideogameCard from '../VideogameCard/VideogameCard'
+import VideogameCard from '../VideogameCard/VideogameCard';
+import Pagination from '../Pagination/Pagination';
 
 
 const Home = () => {
@@ -12,6 +13,16 @@ const Home = () => {
   const allVideogames = useSelector((state) => state.videogames) // mapStateToProps (trae todo lo que esta en el estado de videogames)
   const allGenres = useSelector((state) => state.genres)
 
+  //PAGINADO
+  const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
+  const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+  const indexOfLastVideogame = currentPage * videogamesPerPage;
+  const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
+  const currentVideogames = allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame)
+  
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(()=>{
     dispatch(getAllVideogames()); //component did mount, al montar, despacha esta accion
@@ -52,9 +63,14 @@ const Home = () => {
           }
           </select>
           </div>
+        <Pagination
+        videogamesPerPage={videogamesPerPage}
+        allVideogames={allVideogames.length}
+        paginado={paginado}
+        />
         <div>
         {
-          allVideogames?.map( videogame => {
+          currentVideogames?.map( videogame => {
             return (
               <div>
                 <Link to={/videogame/}>
