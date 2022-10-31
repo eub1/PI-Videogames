@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { Route } from "react-router-dom"; // Switch
+import { Route, Switch } from "react-router-dom"; // Switch -> se va a mover solo dentro de lo que envuelve el switch, para no ir a una ruta que no existe y quedarse en el error, vuelve a la ultima en la que estuvo
 import LandingPage from './components/LandingPage/LandingPage'
 import Home from './components/Home/Home';
 import Nav from './components/Nav/Nav';
@@ -14,9 +14,9 @@ import VideogameDetail from './components/VideogameDetail/VideogameDetail';
 function App() {
   return (
     <div className="App">
-      <h1>Henry Videogames</h1>
       <Route path='/' component={Nav}/>
       <Route exact path='/' component={LandingPage} />
+      <Switch>
       <Route exact path='/home' component={Home} />
       <Route exact path='/videogames' component={VideogameCard} />
       <Route exact path='/pagination' component={Pagination} />
@@ -25,6 +25,7 @@ function App() {
         path="/videogame/:id"
         render={({ match }) => <VideogameDetail id={match.params.id} />}
       />
+      </Switch>
     </div>
   );
 }
