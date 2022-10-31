@@ -27,7 +27,7 @@ const Home = () => {
   useEffect(()=>{
     dispatch(getAllVideogames()); //component did mount, al montar, despacha esta accion
     dispatch(getGenres());
-  },[]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
+  },[dispatch]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
 
   function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
     e.preventDefault();
@@ -37,27 +37,27 @@ const Home = () => {
   return (
     <>
       <Link to='/videogames'>Create New Videogame</Link>
-      <h1 key="title1">PAGE TITLE: Im in Home</h1>
+      <h1>PAGE TITLE: Im in Home</h1>
       <button onClick={handleClick}>Reload Videogames</button>
       <div>
         <div>
-        <select name="asc/desc" id="select1" key="select_asc/desc">
-          <option value="asc" key="asc">Ascendent</option>
-          <option value="desc"key="desc">Descendent</option>
+        <select>
+          <option value="asc" key="a">Ascendent</option>
+          <option value="desc" key="d">Descendent</option>
         </select>
         </div>
         <div>
-        <select name="exists/created" id="select2" key="select_exists/created">
-          <option value="api">Existent</option>
-          <option value="db">Created</option>
+        <select>
+          <option value="api" key="a">Existent</option>
+          <option value="db" key="d">Created</option>
         </select>
         </div>
         <div>
-        <select name="genres" id="select3" key="select_genres">
+        <select>
           {
             allGenres?.map(genre => {
               return (
-                <option value={genre.id} key={genre.id}>{genre.name}</option>
+                <option value={genre.id} key={Math.random()}>{genre.name}</option>
               )
             })
           }
@@ -72,7 +72,7 @@ const Home = () => {
         {
           currentVideogames?.map( videogame => {
             return (
-              <div>
+              <div key={Math.random()}>
                 <Link to={/videogame/}>
                   <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={Math.random()} id={videogame.id}/>
                 </Link>

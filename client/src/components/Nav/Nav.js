@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 const Nav = () => {
   return(
     <>
-    <h1 key="titleNav">Este es el Nav</h1>
+    <h1>Este es el Nav</h1>
     <Link to='/home'>Home</Link>
     </>
   )

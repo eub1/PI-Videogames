@@ -5,13 +5,14 @@ const Pagination = ({videogamesPerPage, allVideogames, paginado}) => {
   for(let i=0; i <= Math.ceil(allVideogames/videogamesPerPage); i++ ){
     pageNumber.push(i+1);
   }
+
   return (
-    <nav>
+    <nav >
       <ul className='paginado'>
         {
-          pageNumber?.map(number =>(
+          pageNumber?.map((number, index) =>(
             <li key={Math.random()} className='number'>
-              <a onClick={()=>paginado(number)}>{number}</a>
+              <button onClick={()=>paginado(number)}>{number}</button>
             </li>
           ))
         }
