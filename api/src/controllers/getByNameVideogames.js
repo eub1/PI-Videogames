@@ -67,7 +67,7 @@ const getByNameVideogames = async(name) => {
   const promises = [ getByNameDbVideogames(name), getByNameApiVideogames(name)]
   const arrayOfMatchedVideogames = await Promise.all(promises)
   console.log("arrayOfMatchedVideogames", arrayOfMatchedVideogames);
-  const flattenedArray = [ ...arrayOfMatchedVideogames[0].flat(), ...arrayOfMatchedVideogames[1]].flat()
+  const flattenedArray = arrayOfAllVideogames[0].concat(arrayOfAllVideogames[1])
   const get15FirstArray = [];
   for(let i=0; i <= 14; i++){
     get15FirstArray.push(flattenedArray[i])

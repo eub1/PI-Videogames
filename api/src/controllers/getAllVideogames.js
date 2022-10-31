@@ -60,8 +60,8 @@ const getAllVideogames = async() => {
 
   const promisesAllVideogames = [getApiVideogames(), getDbVideogames()]
   const arrayOfAllVideogames = await Promise.all(promisesAllVideogames)
-
-  return arrayOfAllVideogames
+  const flattenedArray = arrayOfAllVideogames[0].concat(arrayOfAllVideogames[1])
+  return flattenedArray;
 }
 
 module.exports = getAllVideogames;
