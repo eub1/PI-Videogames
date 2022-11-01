@@ -50,7 +50,7 @@ const getDbVideogames = async () => {
       name: el.name,
       released: el.released,
       rating: el.rating,
-      platforms: el.platforms,
+      platforms: el.Platforms?.map((p) => p.name),
       genre: el.Genres?.map((genero) => genero.name)
     }
   })

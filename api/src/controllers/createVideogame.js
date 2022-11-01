@@ -1,6 +1,5 @@
 const axios = require('axios');
-const { Videogame } = require('../db');
-const { Genre } = require('../db');
+const { Videogame, Genre } = require('../db');
 require('dotenv').config();
 const {
   RAWG_API_KEY
@@ -9,8 +8,9 @@ const {
 
 const createVideogame = async (name, description, released, rating, platforms, genres) => {
 
-  const formVideogame = await Videogame.create({name, description, released, rating, platforms});
+  const formVideogame = await Videogame.create({name, description, released, rating});
 
+  //join GENRES
   const foundGenres = await Genre.findAll({
     where:{
       id: genres
@@ -19,12 +19,28 @@ const createVideogame = async (name, description, released, rating, platforms, g
  
   await formVideogame.addGenres(foundGenres);
 
+  //join PLATFORMS
+  const foundPlatforms = await Genre.findAll({
+    where:{
+      id: platforms
+    }
+  })
+ 
+  await formVideogame.addPlatforms(foundPlatforms);
+
   const newVideogame = await Videogame.findOne({
     where: {
       name: name,
     },
     include: {
       model: Genre,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+    include: {
+      model: Platforms,
       attributes: ["name"],
       through: {
         attributes: [],

@@ -3,6 +3,7 @@ const createVideogame = require('../controllers/createVideogame.js');
 const getAllVideogames = require('../controllers/getAllVideogames.js');
 const getVideogamebyId = require('../controllers/getByIdVideogame.js')
 const getByNameVideogames = require('../controllers/getByNameVideogames.js')
+
 const { Videogame } = require("../db");
 
 const router = express.Router();
@@ -33,7 +34,7 @@ router.get('/', async(req, res) => {
     }
      else {
       const videogames = await getAllVideogames();
-      console.log("videogames",videogames);
+      // console.log("videogames",videogames);
       const concatVideogames = videogames[0].concat(videogames[1])
       return res.status(200).send(concatVideogames);
     }
@@ -86,5 +87,7 @@ try {
   res.send(error.message)
 }
 });
+
+
 
 module.exports = router;
