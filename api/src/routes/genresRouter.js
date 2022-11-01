@@ -1,5 +1,5 @@
 const express = require("express");
-const { Genre } = require("../db");
+// const { Genre } = require("../db");
 const getOrCreateGenres = require("../controllers/getOrCreateGenres");
 
 const router = express.Router();
@@ -12,10 +12,10 @@ const router = express.Router();
 router.get('/', async (req, res) => {
  try {
    const checkedGenres = await getOrCreateGenres()
-   res.send(checkedGenres)
+   checkedGenres ? res.status(200).send(checkedGenres) : res.status(400).send("Genres not found")
  } catch (error) {
   console.log("Error en la ruta '/genres con getOrCreateGenres");
-  res.send(error.message)
+  res.status(400).send(error.message)
  }
 });
 
