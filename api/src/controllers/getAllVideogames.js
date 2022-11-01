@@ -20,6 +20,7 @@ const getApiVideogames = async () => {
       image: videogame["background_image"],
       released: videogame.released,
       rating: videogame.rating,
+      platforms: videogame.platforms?.map( p => p.platform?.name),
       genre: videogame.genres?.map((genero) => genero.name)
     }
   }));
@@ -41,13 +42,16 @@ const getDbVideogames = async () => {
       },
     },
   });
+
+  // console.log("dbVideogames", dbVideogames);
   const fetchedDBVideogames = dbVideogames?.map(el => {
     return {
       id: el.id,
       name: el.name,
       released: el.released,
       rating: el.rating,
-      genres: el.genres?.map((genero) => genero.name)
+      platforms: el.platforms,
+      genre: el.Genres?.map((genero) => genero.name)
     }
   })
 
@@ -58,10 +62,11 @@ const getDbVideogames = async () => {
 
 const getAllVideogames = async() => {
 
-  const promisesAllVideogames = [getApiVideogames(), getDbVideogames()]
-  const arrayOfAllVideogames = await Promise.all(promisesAllVideogames)
-  const flattenedArray = arrayOfAllVideogames[0].concat(arrayOfAllVideogames[1])
-  return flattenedArray;
+  const promisesAllVideogames = [getApiVideogames(), getDbVideogames()];
+  const arrayOfAllVideogames = await Promise.all(promisesAllVideogames);
+
+    return arrayOfAllVideogames;
+
 }
 
 module.exports = getAllVideogames;
