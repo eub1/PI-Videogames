@@ -43,14 +43,12 @@ export const getGenres = () => {
   };
 };
 
-export const filterByGenres = (genresId)=>{
-  return (
-    {
+export const filterVideogamesByGenres = (genreName) => {
+  return {
       type: FILTER_BY_GENRES,
-      payload: genresId
+      payload: genreName
     }
-  )
-}
+};
 
 export const getVideogameDetail = (id) => {
   return function (dispatch) {

@@ -1,4 +1,4 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES} from './actions';
 
 const initialState = {
   videogames: [],
@@ -24,6 +24,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         genres: action.payload,
       };
+    case FILTER_BY_GENRES:
+      const allVideogames = state.videogames;
+      // const accessedGenres = allVideogames.map( v => v.genre);
+      const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter((v, index) => { return v.genre?[index] === action.payload});
+      // const filteredVideogames = []
+      // const array = allVideogames.map(v => Object.values(v.genre)?.includes(action.payload) ? filteredVideogames.push(v) : 0);
+      return {
+        ...state,
+        videogames: genresFiltered,
+      };
     case GET_VIDEOGAME_DETAIL:
       return {
         ...state,
@@ -37,7 +47,7 @@ const rootReducer = (state = initialState, action) => {
     default:
       return { ...state };
   }
-}
+};
 
 
 

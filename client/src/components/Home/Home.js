@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVideogames, getGenres } from '../../redux/actions';
+import { getAllVideogames, getGenres, filterVideogamesByGenres } from '../../redux/actions';
 import {Link} from 'react-router-dom';
 import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
@@ -32,13 +32,17 @@ const Home = () => {
   function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
     e.preventDefault();
     dispatch(getAllVideogames());
-  }
+  };
+
+  function handleFilterGenres(e){
+    dispatch(filterVideogamesByGenres(e.target.value));
+  };
 
   return (
     <>
       <Link to='/videogames'>Create New Videogame</Link>
       <h1>PAGE TITLE: Im in Home</h1>
-      <button onClick={handleClick}>Reload Videogames</button>
+      <button onClick={e =>handleClick(e)}>Reload Videogames</button>
       <div>
         <div>
         <select>
@@ -53,11 +57,11 @@ const Home = () => {
         </select>
         </div>
         <div>
-        <select>
+        <select onChange={e => handleFilterGenres(e)}>
           {
             allGenres?.map(genre => {
               return (
-                <option value={genre.id} key={Math.random()}>{genre.name}</option>
+                < option value={genre.name} key={Math.random()} >{genre.name}</option>
               )
             })
           }

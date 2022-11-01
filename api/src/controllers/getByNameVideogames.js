@@ -55,29 +55,30 @@ const getByNameDbVideogames = async (name) => {
       name: videogame.dataValues.name,
       released: videogame.dataValues.released,
       rating: videogame.dataValues.rating,
-      genre: videogame.dataValues.Genres?.map((genero) => genero.name) // undefined
+      genre: videogame.dataValues?.Genres?.map((genero) => genero.name) // undefined
     }
   })
 
   return  fetchedDBVideogames;
-}
+};
 
 const getByNameVideogames = async(name) => {
 
   const promises = [ getByNameDbVideogames(name), getByNameApiVideogames(name)]
   const arrayOfMatchedVideogames = await Promise.all(promises)
-  // console.log("arrayOfMatchedVideogames", arrayOfMatchedVideogames);
-  const flattenedArray = arrayOfAllVideogames[0].concat(arrayOfAllVideogames[1])
-  const get15FirstArray = [];
-  for(let i=0; i <= 14; i++){
-    get15FirstArray.push(flattenedArray[i])
-  }
-
-  if(get15FirstArray[0] !== null){
-    return get15FirstArray;
+  const flattenedArray =[]
+  if(arrayOfMatchedVideogames[0].length > 0){
+    return flattenedArray = arrayOfMatchedVideogames[0]?.concat(arrayOfMatchedVideogames[1][0])
   } else {
-    throw new Error(`El ${name} no existe, puede crear uno nuevo en la sección de Crear Videojuego`);
-  }; 
-}
+    if(arrayOfMatchedVideogames[1][0].length > 15){
+      const get15FirstArray = [];
+      for(let i=0; i <= 14; i++){
+        get15FirstArray.push(arrayOfMatchedVideogames[1][0][i])
+      }
+      return get15FirstArray;
+    }
+    return arrayOfMatchedVideogames[1][0]
+  };
+};
 
 module.exports = getByNameVideogames;

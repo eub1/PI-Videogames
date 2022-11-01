@@ -18,14 +18,24 @@ const router = express.Router();
 
 router.get('/', async(req, res) => {
   try {
-    const {name} = req.query;
+    const { name } = req.query;
+    const { filter } = req.query;
     if(name){
       const byNameVideogames = await getByNameVideogames(name);
          // console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
-      if(byNameVideogames.length) {return res.status(200).send(byNameVideogames)}  
-    } else {
+      if(byNameVideogames.length) {
+        return res.status(200).send(byNameVideogames)
+      };
+    };
+    if(filter){
       const videogames = await getAllVideogames();
-      res.status(200).send(videogames);
+      return res.status(200).send(videogames);
+    }
+     else {
+      const videogames = await getAllVideogames();
+      console.log("videogames",videogames);
+      const concatVideogames = videogames[0].concat(videogames[1])
+      return res.status(200).send(concatVideogames);
     }
   } catch (error) {
     res.send(error.message);
