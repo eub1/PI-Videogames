@@ -40,6 +40,7 @@ const { Videogame, Genre, Platform } = sequelize.models;
 Videogame.belongsToMany(Genre, {through: "videogames_genres"});
 Genre.belongsToMany(Videogame, {through: "videogames_genres"}); 
 
+// ver si lo voy a necesitar, para seleccinar los platforms al crear videogame en form
 Videogame.belongsToMany(Platform, {through: "videogames_platforms"});
 Platform.belongsToMany(Videogame, {through: "videogames_platforms"});
 

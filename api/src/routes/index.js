@@ -29,7 +29,7 @@ router.get('/', (req, res) => {
 router.get('/platforms', async(req, res)=> {
   try {
     const receivedPlatforms = await getAllPlatforms();
-    res.status(200).send("Got all the Platforms");
+    res.status(200).send(receivedPlatforms);
   } catch (error) {
     res.send(error.message)
   }

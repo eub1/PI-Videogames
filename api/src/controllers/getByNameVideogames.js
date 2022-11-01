@@ -22,7 +22,7 @@ const getByNameApiVideogames = async (name) => {
       image: videogame["background_image"],
       released: videogame.released,
       rating: videogame.rating,
-      genre: videogame.genres?.map((genero) => genero.name)
+      genres: videogame.genres?.map((genero) => genero.name)
     }
   }))
   matchedApiVideogames.flat();
@@ -55,7 +55,7 @@ const getByNameDbVideogames = async (name) => {
       name: videogame.dataValues.name,
       released: videogame.dataValues.released,
       rating: videogame.dataValues.rating,
-      genre: videogame.dataValues?.Genres?.map((genero) => genero.name) // undefined
+      genres: videogame.dataValues?.Genres?.map((genero) => genero.name) // undefined
     }
   })
 

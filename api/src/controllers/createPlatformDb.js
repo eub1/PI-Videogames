@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Platform, Op } = require('../db');
+const { Platform } = require('../db');
 require('dotenv').config();
 const {
   RAWG_API_KEY
@@ -9,24 +9,34 @@ const {
 const getAllPlatforms = async () => {
 
   const fetchedApiPlatforms = await axios.get(`https://api.rawg.io/api/games?key=${RAWG_API_KEY}`);
-  const arrayOfPlatforms = [];
-  fetchedApiPlatforms.data?.results?.map( (p) => arrayOfPlatforms.push(p.platforms))
+  const apiPlatformsArray = fetchedApiPlatforms.data?.results?.map( (v) => v.platforms).flat()
   
-  const arrayOfPlatforms2 = []
-  arrayOfPlatforms.flat().map(p => arrayOfPlatforms2.push(p.platform.name))
+  const arrayOfPlatforms = apiPlatformsArray.map(p => p.platform.name)
+  const platformsByName = [...new Set(arrayOfPlatforms)].sort()
 
+  const promisesToCreatePlatforms = platformsByName.map( p => Platform.findOrCreate({ where: {name: p}}))
   
-  const platformsArray = [...new Set(arrayOfPlatforms2)].sort().map( p => 
-    Platform.create({ where: {name: p}}))
+  const arrayFoundCreatedPlatforms = await Promise.all(promisesToCreatePlatforms);
   
- const arrayFoundCreatedPlatforms = await Promise.all(platformsArray);
- 
-
-  console.log("fetchedApiPlatforms", arrayFoundCreatedPlatforms);
-  
-  return arrayFoundCreatedPlatforms;
+  const fetchedDbPlatforms = []
+  arrayFoundCreatedPlatforms.forEach( item => fetchedDbPlatforms.push({id: item[0].dataValues.id, name: item[0].dataValues.name}))
+  console.log("fetchedDbPlatforms", fetchedDbPlatforms);
+  return fetchedDbPlatforms;
 
 };
 
-
 module.exports = getAllPlatforms;
+
+
+/* 
+fetchedApiPlatforms [
+  'Android',         'Linux',
+  'Nintendo Switch', 'PC',
+  'PS Vita',         'PlayStation 3',
+  'PlayStation 4',   'PlayStation 5',
+  'Web',             'Xbox',
+  'Xbox 360',        'Xbox One',
+  'Xbox Series S/X', 'iOS',
+  'macOS'
+]
+*/

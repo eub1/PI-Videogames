@@ -1,6 +1,6 @@
 const axios = require('axios');
-const { Videogame } = require('../db');
-const { Genre } = require('../db');
+const { Videogame, Genre, Platform } = require('../db');
+
 require('dotenv').config();
 const {
   RAWG_API_KEY
@@ -10,7 +10,7 @@ const {
 const getApiIdVideogame = async (id) => {
   
   const fetchedData = await axios.get(`https://api.rawg.io/api/games/${id}?key=${RAWG_API_KEY}`);
-  // console.log(fetchedData.data, "fetchedData");
+  // console.log("fetchedData", fetchedData.data );
 
   if(!fetchedData) { throw "No se ha encontrado el videojuego" };
 
@@ -21,11 +21,11 @@ const getApiIdVideogame = async (id) => {
       description: fetchedData.data.description_raw,
       released: fetchedData.data.released,
       rating: fetchedData.data.rating,
-      platforms: fetchedData.data.platforms?.map( p => p.name),
+      platforms: fetchedData.data.platforms?.map( p => p.platform).map(p => p.name),
       genre: fetchedData.data.genres?.map((genero) => genero.name)
     }
   
-  // console.log(foundVideogame, "foundVideogame");
+// console.log("foundVideogame", foundVideogame);
 
   return foundVideogame;
 
@@ -33,6 +33,13 @@ const getApiIdVideogame = async (id) => {
 
 const getDbIdVideogame = async (id) => {
   const dbVideogame = await Videogame.findByPk(id, { 
+    include: {
+      model: Platform,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
     include: {
       model: Genre,
       attributes: ["name"],
@@ -42,7 +49,7 @@ const getDbIdVideogame = async (id) => {
     },
   });
 
-  // console.log(dbVideogame, "dbgames");
+console.log(dbVideogame, "dbgames");
 
   return dbVideogame;
 }
@@ -56,18 +63,6 @@ const getVideogamebyId = async(id) => {
 
 module.exports = getVideogamebyId;
 
-
-
-// const mySet = new Set()
-
-//   let gotPlatformsName = apiVideogames.results.map((videogame) => {
-//     return videogame.platforms
-//   })
-//     gotPlatformsName.flat().map((plataforma) => {
-
-//     return mySet.add(plataforma.platform.name)
-//   })
-//   const platformsByName = [...mySet];
 
 //   const formatApiVideogames = apiVideogames.results.map((videogame) => {
 //     return {

@@ -1,6 +1,6 @@
 const axios = require('axios');
-const { Videogame } = require('../db');
-const { Genre } = require('../db');
+const { Videogame, Genre, Platform } = require('../db');
+
 require('dotenv').config();
 const {
   RAWG_API_KEY
@@ -35,12 +35,19 @@ const getDbVideogames = async () => {
   const dbVideogames = await Videogame.findAll({
     // attributes: ['id', 'name', 'released', 'rating'],
     include: {
-      model: Genre,
+      model: Platform,
       attributes: ["name"],
       through: {
         attributes: [],
       },
     },
+    include: {
+      model: Genre,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      }
+    }
   });
 
   // console.log("dbVideogames", dbVideogames);

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Videogame, Genre } = require('../db');
+const { Videogame, Genre, Platform } = require('../db');
 require('dotenv').config();
 const {
   RAWG_API_KEY
@@ -10,7 +10,7 @@ const createVideogame = async (name, description, released, rating, platforms, g
 
   const formVideogame = await Videogame.create({name, description, released, rating});
 
-  //join GENRES
+  //jointTable GENRES
   const foundGenres = await Genre.findAll({
     where:{
       id: genres
@@ -19,8 +19,8 @@ const createVideogame = async (name, description, released, rating, platforms, g
  
   await formVideogame.addGenres(foundGenres);
 
-  //join PLATFORMS
-  const foundPlatforms = await Genre.findAll({
+  //jointTable PLATFORMS
+  const foundPlatforms = await Platform.findAll({
     where:{
       id: platforms
     }
@@ -33,14 +33,14 @@ const createVideogame = async (name, description, released, rating, platforms, g
       name: name,
     },
     include: {
-      model: Genre,
+      model: Platform,
       attributes: ["name"],
       through: {
         attributes: [],
       },
     },
     include: {
-      model: Platforms,
+      model: Genre,
       attributes: ["name"],
       through: {
         attributes: [],
@@ -48,7 +48,7 @@ const createVideogame = async (name, description, released, rating, platforms, g
     },
   })
   
-  // console.log(newVideogame, "soy el nuevo videojuego creado en controller createVideogame");
+  console.log(newVideogame, "soy el nuevo videojuego creado en controller createVideogame");
   return newVideogame;
 
 };
