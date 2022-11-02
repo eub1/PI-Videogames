@@ -24,9 +24,9 @@ router.get('/', async(req, res) => {
     if(name){
       const byNameVideogames = await getByNameVideogames(name);
          // console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
-      if(byNameVideogames.length) {
+      if(byNameVideogames.length || byNameVideogames[0] !== null ) {
         return res.status(200).send(byNameVideogames)
-      };
+      } else { return res.status(404).send("Game not found, please try again or create a new one")}
     };
     if(filter){
       const videogames = await getAllVideogames();
@@ -39,7 +39,7 @@ router.get('/', async(req, res) => {
       return res.status(200).send(concatVideogames);
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(400).send(error.message);
   }
 
 });
@@ -56,16 +56,17 @@ router.post('/', async (req, res) => {
   try {
 
     if (!name || !description || !platforms) {
-      return res.status(404).send("Falta enviar datos obligatorios");
-    }
+      return res.status(404).send("Please complete the required fields");
+    };
 
     const createdVideogame = await createVideogame(name, description, released, rating, platforms, genres);
-    console.log("createdVideogame en POST '/' ");
+    console.log("createdVideogame in POST '/' ");
+    
     res.status(201).send( createdVideogame );
 
   } catch (error) {
-    console.log(`Error en ruta POST '/'. ${error.message}`);
-    return res.status(404).send(error);
+    console.log(`Error in route POST '/'. ${error.message}`);
+    res.status(404).send(error.message);
   }
 });
 
@@ -79,12 +80,15 @@ router.get('/:id', async (req, res) => {
 try {
   // console.log(req.params);
   const {id} = req.params
-  if(!id){ throw new Error(`Debe indicar un id para poder encontrar el Videojuego`)}
+  if(!id){ throw new Error(`Please write a videogame Id at the end of the url /videogame/id`)};
+
   const videogameById = await  getVideogamebyId(id)
-  res.status(200).send(videogameById)
+
+  res.status(200).send(videogameById);
   
 } catch (error) {
-  res.send(error.message)
+  console.log(`Error in route /:id.  ${error.message}`);
+  res.status(400).send(error.message);
 }
 });
 
