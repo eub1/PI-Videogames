@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
    const checkedGenres = await getOrCreateGenres()
    checkedGenres ? res.status(200).send(checkedGenres) : res.status(400).send("Genres not found")
  } catch (error) {
-  console.log("Error en la ruta '/genres con getOrCreateGenres");
+  console.log("Error in route '/genres with getOrCreateGenres");
   res.status(400).send(error.message)
  }
 });
