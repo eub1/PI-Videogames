@@ -8,7 +8,7 @@ const {
 
 const createVideogame = async (name, description, released, rating, platforms, genres) => {
 
-  const formVideogame = await Videogame.create({name, description, released, rating});
+  const formVideogame = await Videogame.create({name, description, released, rating, platforms});
 
   //jointTable GENRES
   const foundGenres = await Genre.findAll({
@@ -31,13 +31,6 @@ const createVideogame = async (name, description, released, rating, platforms, g
   const newVideogame = await Videogame.findOne({
     where: {
       name: name,
-    },
-    include: {
-      model: Platform,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
     },
     include: {
       model: Genre,
