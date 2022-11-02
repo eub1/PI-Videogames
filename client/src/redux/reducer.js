@@ -26,10 +26,8 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_BY_GENRES:
       const allVideogames = state.videogames;
-      // const accessedGenres = allVideogames.map( v => v.genre);
-      const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter((v, index) => { return v.genre?[index] === action.payload});
-      // const filteredVideogames = []
-      // const array = allVideogames.map(v => Object.values(v.genre)?.includes(action.payload) ? filteredVideogames.push(v) : 0);
+      const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter( v => v.genre.includes(action.payload));
+
       return {
         ...state,
         videogames: genresFiltered,
@@ -37,7 +35,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_VIDEOGAME_DETAIL:
       return {
         ...state,
-        videogameDetail: action.payload,
+        videogameDetail: genresFiltered,
       };
     case CLEAN_DETAIL:
       return {

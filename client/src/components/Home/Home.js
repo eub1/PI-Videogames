@@ -11,6 +11,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const allVideogames = useSelector((state) => state.videogames) // mapStateToProps (trae todo lo que esta en el estado de videogames)
+  console.log("allVideogames", allVideogames);
   const allGenres = useSelector((state) => state.genres)
 
   //PAGINADO
@@ -35,6 +36,7 @@ const Home = () => {
   };
 
   function handleFilterGenres(e){
+    console.log(e.target.value);
     dispatch(filterVideogamesByGenres(e.target.value));
   };
 
