@@ -26,6 +26,19 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_BY_GENRES:
       const allVideogames = state.videogames;
+       if(action.value === "Ascendent"){
+        allVideogames.sort(function(a,b) {
+          if(a.name > b.name){ return 1; }
+          if(a.name < b.name){ return -1; }
+          return 0
+        });
+      } else if(action.value === "Descendent"){
+        allVideogames.sort(function(a,b) {
+          if(a.name > b.name){ return -1; }
+          if(a.name < b.name){ return 1; }
+          return 0
+        });
+      };
       const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter( v => v.genre.includes(action.payload));
 
       return {

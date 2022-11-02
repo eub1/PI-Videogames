@@ -11,9 +11,13 @@ import Pagination from '../Pagination/Pagination';
 const Home = () => {
 
   const dispatch = useDispatch();
+  //GLOBAL STATES
   const allVideogames = useSelector((state) => state.videogames) // mapStateToProps (trae todo lo que esta en el estado de videogames)
-  console.log("allVideogames", allVideogames);
   const allGenres = useSelector((state) => state.genres)
+
+  //LOCAL STATES
+  //ORDEN
+  const [currentOrder, setOrder] = useState(" ")
 
   //PAGINADO
   const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
@@ -36,9 +40,14 @@ const Home = () => {
     dispatch(getAllVideogames());
   };
 
+  function handleOrder(e){
+    console.log(e.target.value);
+    setOrder(e.target.value);
+  };
+
   function handleFilterGenres(e){
     console.log(e.target.value);
-    dispatch(filterVideogamesByGenres(e.target.value));
+    dispatch(filterVideogamesByGenres(e.target.value, currentOrder));
   };
 
   return (
@@ -48,9 +57,10 @@ const Home = () => {
       <button onClick={e =>handleClick(e)}>Reload Videogames</button>
       <div>
         <div>
-        <select>
-          <option value="asc" key="a">Ascendent</option>
-          <option value="desc" key="d">Descendent</option>
+        <select onChange = {e => handleOrder(e)}>
+          <option value="Select order" > Select order </option>
+          <option value="Ascendent" > Ascendent </option>
+          <option value="Descendent" > Descendent </option>
         </select>
         </div>
         <div>

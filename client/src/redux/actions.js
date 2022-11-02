@@ -43,10 +43,11 @@ export const getGenres = () => {
   };
 };
 
-export const filterVideogamesByGenres = (genreName) => {
+export const filterVideogamesByGenres = (genreName, value) => {
   return {
       type: FILTER_BY_GENRES,
-      payload: genreName
+      payload: genreName,
+      value
     }
 };
 
