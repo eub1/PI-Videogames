@@ -2,7 +2,7 @@ import s from './home.module.css';
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVideogames, getGenres, filterVideogamesByGenres } from '../../redux/actions';
+import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource } from '../../redux/actions';
 import {Link} from 'react-router-dom';
 import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
@@ -17,7 +17,11 @@ const Home = () => {
 
   //LOCAL STATES
   //ORDEN
-  const [currentOrder, setOrder] = useState(" ")
+  // const [currentOrder, setOrder] = useState("Select order");
+  // // SEARCH SOURCE
+  // const[currentSource, setSource] = useState("All Sources");
+  // //GENRE
+  // const[currentGenre, setGenre] = useState("All Genres");
 
   //PAGINADO
   const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
@@ -40,14 +44,26 @@ const Home = () => {
     dispatch(getAllVideogames());
   };
 
-  function handleOrder(e){
-    console.log(e.target.value);
-    setOrder(e.target.value);
+  // function handleOrder(e){
+  //   console.log(e.target.value);
+  //   setOrder(e.target.value);
+  // };
+
+  // function handleSource(e){
+  //   console.log(e.target.value);
+  //   setSource(e.target.value);
+  // };
+  // function handleFilterGenres(e){
+  //   console.log(e.target.value);
+  //   setGenre(e.target.value)
+  //   dispatch(filterVideogamesByGenres(currentGenre, currentOrder, currentSource));
+  // };
+  function handleFilterGenres(e){
+    dispatch(filterVideogamesByGenres(e.target.value));
   };
 
-  function handleFilterGenres(e){
-    console.log(e.target.value);
-    dispatch(filterVideogamesByGenres(e.target.value, currentOrder));
+  function handleFilterSource(e){
+    dispatch(filterSource(e.target.value))
   };
 
   return (
@@ -57,22 +73,22 @@ const Home = () => {
       <button onClick={e =>handleClick(e)}>Reload Videogames</button>
       <div>
         <div>
-        <select onChange = {e => handleOrder(e)}>
-          <option value="Select order" > Select order </option>
-          <option value="Ascendent" > Ascendent </option>
-          <option value="Descendent" > Descendent </option>
+        <select>{/*  onChange = {e => handleOrder(e)} */}
+          <option value="Select order" key="s"> Select order </option>
+          <option value="Ascendent" key="a"> Ascendent </option>
+          <option value="Descendent" key="d"> Descendent </option>
         </select>
         </div>
         <div>
-        <select>
-          <option value="api" key="a">Existent</option>
-          <option value="db" key="d">Created</option>
+        <select onChange={e => handleFilterSource(e)}> {/* onChange={e => handleSource(e)} */}
+          <option value="All Sources" key="s">All Sources</option>
+          <option value="Existent" key="a">Existent</option>
+          <option value="Created" key="d">Created</option>
         </select>
         </div>
         <div>
         <select onChange={e => handleFilterGenres(e)}>
-          {
-            allGenres?.map(genre => {
+          { allGenres?.map(genre => {
               return (
                 < option value={genre.name} key={Math.random()} >{genre.name}</option>
               )
@@ -80,6 +96,20 @@ const Home = () => {
           }
           </select>
           </div>
+        {/* <div>
+        <select onChange={e => handleFilterGenres(e)}>
+          < option value="All Genres" key={2} > Select Genre</option>
+          { currentGenre === "All Genres" ? (
+            allGenres?.map(genre => {
+              return (
+                < option value={genre.name} key={Math.random()+1} >{genre.name}</option>
+              )
+            })
+          ) : 
+          < option value={currentGenre} key={1} >{currentGenre}</option>
+          }
+          </select>
+          </div> */}
         <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}

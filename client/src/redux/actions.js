@@ -5,6 +5,7 @@ export const GET_GENRES = "GET_GENRES";
 export const GET_VIDEOGAME_DETAIL = "GET_VIDEOGAME_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const FILTER_BY_GENRES = "FILTER_BY_GENRES";
+export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
 
 
 
@@ -42,14 +43,27 @@ export const getGenres = () => {
     }
   };
 };
-
-export const filterVideogamesByGenres = (genreName, value) => {
+export const filterVideogamesByGenres = (genreName) => {
   return {
       type: FILTER_BY_GENRES,
-      payload: genreName,
-      value
+      payload: genreName
     }
 };
+
+// export const filterVideogamesByGenres = (genreName, value, source) => {
+//   return {
+//       type: FILTER_BY_GENRES,
+//       payload: genreName,
+//       value,
+//       source
+//     }
+// };
+
+export const filterSource = (payload)=>{
+  return {
+    type: FILTER_BY_SOURCE,
+    payload
+}};
 
 export const getVideogameDetail = (id) => {
   return function (dispatch) {

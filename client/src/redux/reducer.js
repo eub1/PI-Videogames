@@ -1,7 +1,8 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE} from './actions';
 
 const initialState = {
   videogames: [],
+  all_videogames: [],
   genres: [],
   videogameDetail: {}
 };
@@ -13,6 +14,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         videogames: action.payload, // [array de videojuegos]
+        all_videogames: action.payload
       };
     case GET_BY_NAME_VIDEOGAMES:
       return {
@@ -24,31 +26,41 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         genres: action.payload,
       };
-    case FILTER_BY_GENRES:
-      const allVideogames = state.videogames;
-       if(action.value === "Ascendent"){
-        allVideogames.sort(function(a,b) {
-          if(a.name > b.name){ return 1; }
-          if(a.name < b.name){ return -1; }
-          return 0
-        });
-      } else if(action.value === "Descendent"){
-        allVideogames.sort(function(a,b) {
-          if(a.name > b.name){ return -1; }
-          if(a.name < b.name){ return 1; }
-          return 0
-        });
-      };
-      const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter( v => v.genre.includes(action.payload));
-
+    case FILTER_BY_SOURCE:
+      const all_Videogames = state.all_videogames;
+      const sourceFiltered = action.payload === "Created" ? all_Videogames.filter( v => v.id.length > 15) : all_Videogames.filter( v => v.id.length < 15)
       return {
         ...state,
-        videogames: genresFiltered,
+        videogames: action.payload === "All Sources" ? state.all_videogames : sourceFiltered
+      }
+    case FILTER_BY_GENRES:
+      const allVideogames = state.all_videogames;
+      // if(action.source === "Existent"){ allVideogames.filter( v => v.id.length < 15)};
+      // if(action.source === "Created"){ allVideogames.filter( v => v.id.length > 15)};
+      // if(action.value === "Ascendent"){
+      //   allVideogames.sort(function(a,b) {
+      //     if(a.name > b.name){ return 1; }
+      //     if(a.name < b.name){ return -1; }
+      //     return 0
+      //   });
+      // } else if(action.value === "Descendent"){
+      //   allVideogames.sort(function(a,b) {
+      //     if(a.name > b.name){ return -1; }
+      //     if(a.name < b.name){ return 1; }
+      //     return 0
+      //   });
+      // };
+      const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter( v => v.genre.includes(action.payload));
+      // const uniqueGenresFiltered = [...new Set(genresFiltered)]
+      // console.log(uniqueGenresFiltered);
+      return {
+        ...state,
+        videogames:  genresFiltered,
       };
     case GET_VIDEOGAME_DETAIL:
       return {
         ...state,
-        videogameDetail: genresFiltered,
+        videogameDetail: action.payload,
       };
     case CLEAN_DETAIL:
       return {
