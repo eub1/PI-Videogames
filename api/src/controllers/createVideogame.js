@@ -33,6 +33,13 @@ const createVideogame = async (name, description, released, rating, platforms, g
       name: name,
     },
     include: {
+      model: Platform,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+    include: {
       model: Genre,
       attributes: ["name"],
       through: {
