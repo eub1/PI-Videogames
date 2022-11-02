@@ -17,13 +17,13 @@ router.use('/videogame', videogameIdRouter);
 
 
 // /home
-router.get('/', (req, res) => {
- try {
-  res.send("prueba de ruta get")
- } catch (error) {
-  res.send(error.message)
- }
-})
+// router.get('/', (req, res) => {
+//  try {
+//   res.send("prueba de ruta get")
+//  } catch (error) {
+//   res.send(error.message)
+//  }
+// })
 
 // /platforms
 router.get('/platforms', async(req, res)=> {
