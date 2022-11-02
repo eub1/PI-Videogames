@@ -1,3 +1,4 @@
+import s from './home.module.css';
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -74,11 +75,11 @@ const Home = () => {
         allVideogames={allVideogames.length}
         paginado={paginado}
         />
-        <div>
+        <div className = {s.vCard_container}>
         {
           currentVideogames?.map( videogame => {
             return (
-              <div key={Math.random()}>
+              <div key={Math.random()} className={s.vCard}>
                 <Link to={/videogame/}>
                   <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={Math.random()} id={videogame.id}/>
                 </Link>
