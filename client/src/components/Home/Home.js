@@ -2,10 +2,11 @@ import s from './home.module.css';
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource } from '../../redux/actions';
+import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource, orderByName } from '../../redux/actions';
 import {Link} from 'react-router-dom';
 import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
+import SearchBar from "../SearchBar/SearchBar";
 
 
 const Home = () => {
@@ -17,8 +18,8 @@ const Home = () => {
 
   //LOCAL STATES
   //ORDEN
-  // const [currentOrder, setOrder] = useState("Select order");
-  // // SEARCH SOURCE
+  const [currentOrder, setOrder] = useState("Select order");
+  // SEARCH SOURCE
   // const[currentSource, setSource] = useState("All Sources");
   // //GENRE
   // const[currentGenre, setGenre] = useState("All Genres");
@@ -43,6 +44,13 @@ const Home = () => {
     e.preventDefault();
     dispatch(getAllVideogames());
   };
+
+  function handleOrder(e){
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPage(1); // al ordenar, seteame la pag en la primera.
+    setOrder(`${e.target.value} order`) // seteo este estado local, para que haga la modificacion del estado
+  }
 
   // function handleOrder(e){
   //   console.log(e.target.value);
@@ -73,7 +81,7 @@ const Home = () => {
       <button onClick={e =>handleClick(e)}>Reload Videogames</button>
       <div>
         <div>
-        <select>{/*  onChange = {e => handleOrder(e)} */}
+        <select  onChange = {e => handleOrder(e)}>{/*  onChange = {e => handleOrder(e)} */}
           <option value="Select order" key="s"> Select order </option>
           <option value="Ascendent" key="a"> Ascendent </option>
           <option value="Descendent" key="d"> Descendent </option>
@@ -110,6 +118,7 @@ const Home = () => {
           }
           </select>
           </div> */}
+        <SearchBar/>
         <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}

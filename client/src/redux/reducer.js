@@ -1,4 +1,4 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME} from './actions';
 
 const initialState = {
   videogames: [],
@@ -25,6 +25,22 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      };
+    case ORDER_BY_NAME:
+      let sortedArray = action.payload === "Ascendent" ?
+      state.videogames.sort(function(a,b) {
+            if(a.name > b.name){ return 1; }
+            if(a.name < b.name){ return -1; }
+            return 0
+          }) : 
+      state.videogames.sort(function(a,b) {
+            if(a.name > b.name){ return -1; }
+            if(a.name < b.name){ return 1; }
+            return 0
+          }); // return 0, si son iguales, los deja igual
+      return {
+        ...state,
+        videogames: sortedArray,
       };
     case FILTER_BY_SOURCE:
       const all_Videogames = state.all_videogames;
