@@ -26,7 +26,7 @@ router.get('/', async(req, res) => {
          byNameVideogames.length ? res.status(200).send(byNameVideogames) : res.status(404).send("Game not found, please try again or create a new one")}
     else {
         const videogames = await getAllVideogames();
-        console.log("videogames",videogames.length, videogames);
+        // console.log("videogames",videogames.length, videogames,"videogames",videogames.length);
         return res.status(200).send(videogames);
       }
   } catch (error) {

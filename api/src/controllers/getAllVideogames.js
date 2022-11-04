@@ -9,11 +9,18 @@ const {
 
 const getApiVideogames = async () => {
 
-  const api100 = [];
-  for ( let i = 0; i < 5 ; i++ ) {
-    const fetchedData = await axios.get(`https://api.rawg.io/api/games?key=${RAWG_API_KEY}`);
+  const api100 = new Set();
 
-    api100.push( fetchedData.data.results.map((videogame) =>{
+  for ( let i = 1; i < 6 ; i++ ) {
+    const fetchedData = await axios.get(`https://api.rawg.io/api/games?key=${RAWG_API_KEY}&page=${i}`);
+
+    api100.add(fetchedData.data.results);
+  };
+
+  // console.log("api100", api100.length, api100, "api100", api100.length);
+  const apiVideogames = [...api100].flat()
+  // console.log("apiVideogames", apiVideogames.length, apiVideogames, "apiVideogames", apiVideogames.length);
+  const apiVideogamesFormatedArray = apiVideogames.map((videogame) =>{
     return {
       id: videogame.id,
       name: videogame.name,
@@ -23,11 +30,10 @@ const getApiVideogames = async () => {
       platforms: videogame.platforms?.map( p => p.platform?.name),
       genre: videogame.genres?.map((genero) => genero.name)
     }
-  }));
-  };
-  const apiVideogames = api100.flat()
-
-  return apiVideogames;
+  });
+  
+  //  console.log("apiVideogamesFormatedArray", apiVideogamesFormatedArray.length, apiVideogamesFormatedArray);
+  return apiVideogamesFormatedArray;
 
 };
 
@@ -71,9 +77,10 @@ const getAllVideogames = async() => {
 
   const promisesAllVideogames = [getApiVideogames(), getDbVideogames()];
   const arrayOfAllVideogames = await Promise.all(promisesAllVideogames);
-
-    return arrayOfAllVideogames;
-
+  
+  const flattenedArray = arrayOfAllVideogames[0].concat(arrayOfAllVideogames[1])
+  // console.log("flattenedArray", flattenedArray.length, flattenedArray,"flattenedArray", flattenedArray.length);
+    return flattenedArray;
 }
 
 module.exports = getAllVideogames;
