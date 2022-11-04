@@ -76,7 +76,7 @@ const Home = () => {
 
   return (
     <>
-      <Link to='/videogames'>Create New Videogame</Link>
+      <Link to='/create'>Create New Videogame</Link>
       <h1>PAGE TITLE: Im in Home</h1>
       <button onClick={e =>handleClick(e)}>Reload Videogames</button>
       <div>

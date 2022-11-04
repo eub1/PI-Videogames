@@ -1,10 +1,11 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME} from './actions';
 
 const initialState = {
   videogames: [],
   all_videogames: [],
   genres: [],
-  videogameDetail: {}
+  videogameDetail: {},
+  platforms: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         genres: action.payload,
+      };
+    case GET_PLATFORMS:
+      return {
+        ...state,
+        platforms: action.payload,
       };
     case ORDER_BY_NAME:
       let sortedArray = action.payload === "Ascendent" ?
@@ -82,6 +88,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         videogameDetail: {},
+      };
+    case "POST_VIDEOGAME":
+      return {
+        ...state,
       };
     default:
       return { ...state };
