@@ -1,7 +1,6 @@
 const express = require("express");
 const createVideogame = require('../controllers/createVideogame.js');
 const getAllVideogames = require('../controllers/getAllVideogames.js');
-const getVideogamebyId = require('../controllers/getByIdVideogame.js')
 const getByNameVideogames = require('../controllers/getByNameVideogames.js')
 
 const { Videogame } = require("../db");
@@ -20,26 +19,18 @@ const router = express.Router();
 router.get('/', async(req, res) => {
   try {
     const { name } = req.query;
-    const { filter } = req.query;
+    // console.log("name", name, typeof name);
     if(name){
-      const byNameVideogames = await getByNameVideogames(name);
-         // console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
-      if(byNameVideogames.length || byNameVideogames[0] !== null ) {
-        return res.status(200).send(byNameVideogames)
-      } else { return res.status(404).send("Game not found, please try again or create a new one")}
-    };
-    if(filter){
-      const videogames = await getAllVideogames();
-      return res.status(200).send(videogames);
-    }
-     else {
-      const videogames = await getAllVideogames();
-      // console.log("videogames",videogames);
-      const concatVideogames = videogames[0].concat(videogames[1])
-      return res.status(200).send(concatVideogames);
-    }
+        const byNameVideogames = await getByNameVideogames(name);
+        //  console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
+         byNameVideogames.length ? res.status(200).send(byNameVideogames) : res.status(404).send("Game not found, please try again or create a new one")}
+    else {
+        const videogames = await getAllVideogames();
+        console.log("videogames",videogames.length, videogames);
+        return res.status(200).send(videogames);
+      }
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(404).send(error.message);
   }
 
 });
