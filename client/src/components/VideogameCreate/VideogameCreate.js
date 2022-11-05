@@ -4,11 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import {postVideogame, getPlatforms} from '../../redux/actions'
 
 
+function validate(input){
+  let errors = {};
+  if(!input.name){
+    errors.name = 'Name required';
+  } else if(!input.description){
+    errors.description = "Description required"
+  } 
+  return errors;
+};
+
+
 const VideogameCreate = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
   const platforms = useSelector((state) => state.platforms);
+  
 
   // const {name, description, released, rating, platforms, genres} = req.body
   const [input, setInput] = useState({
@@ -20,6 +32,8 @@ const VideogameCreate = () => {
     genres: []
   });
 
+  const [ errors, setErrors] = useState({});
+
   useEffect(()=>{
     dispatch(getPlatforms());
   }, []);
@@ -30,6 +44,10 @@ const VideogameCreate = () => {
       ...input,
       [e.target.name]: e.target.value
     });
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }));
     console.log(input);
   };
 
@@ -67,7 +85,12 @@ const VideogameCreate = () => {
     history.push('/home') //useHistory, metodo del router que me redirige a la ruta que le digo. Ya se creo el vidoegame, ahora llevame al home
   }; //guarda en un arreglo todo lo que voy seleccionando
 
-  
+  const handleDelete = (p) =>{
+    setInput({
+      ...input,
+      platforms: input.platforms.filter( plataforma => plataforma !== p)
+    })
+  };
 
 
 
@@ -80,10 +103,12 @@ const VideogameCreate = () => {
         <div>
           <label>Name:</label>
           <input type="text" value= {input.name} name= "name" onChange = {e => handleChange(e)}/>
+          {errors.name && (<p className='error'>{errors.name}</p>)}
         </div>
         <div>
           <label>Description:</label>
           <input type="text" value= {input.description} name= "description" onChange = {e => handleChange(e)}/>
+          {errors.description && (<p className='error'>{errors.description}</p>)}
         </div>
         <div>
           <label>Released date:</label>
@@ -118,6 +143,11 @@ const VideogameCreate = () => {
         </div>
         <button type='submit' >Create Videogame</button>
       </form>
+      {input.platforms?.map( p =>
+        <div className = 'divPlatformsSelectedDelete' key={p}>
+          <p>{p}</p>
+          <button className='buttonX' onClick={()=>handleDelete(p)}>X</button>
+        </div>)}
     </div>
   )
 };
