@@ -64,9 +64,9 @@ const Home = () => {
       <div>
         <div>
         <select  onChange = {e => handleOrder(e)}>
-          <option value="Select order" key="s"> Select order </option>
-          <option value="Ascendent" key="a"> Ascendent </option>
-          <option value="Descendent" key="d"> Descendent </option>
+          <option value="Select order" key="s"> Order by Videogame name </option>
+          <option value="Ascendent" key="a"> A-Z </option>
+          <option value="Descendent" key="d"> Z-A </option>
         </select>
         </div>
         <div>
