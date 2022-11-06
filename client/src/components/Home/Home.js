@@ -19,10 +19,6 @@ const Home = () => {
   //LOCAL STATES
   //ORDEN
   const [currentOrder, setOrder] = useState("Select order");
-  // SEARCH SOURCE
-  // const[currentSource, setSource] = useState("All Sources");
-  // //GENRE
-  // const[currentGenre, setGenre] = useState("All Genres");
 
   //PAGINADO
   const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
@@ -38,7 +34,7 @@ const Home = () => {
   useEffect(()=>{
     dispatch(getAllVideogames()); //component did mount, al montar, despacha esta accion
     dispatch(getGenres());
-  },[dispatch]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
+  },[]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
 
   function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
     e.preventDefault();
@@ -52,20 +48,6 @@ const Home = () => {
     setOrder(`${e.target.value} order`) // seteo este estado local, para que haga la modificacion del estado
   }
 
-  // function handleOrder(e){
-  //   console.log(e.target.value);
-  //   setOrder(e.target.value);
-  // };
-
-  // function handleSource(e){
-  //   console.log(e.target.value);
-  //   setSource(e.target.value);
-  // };
-  // function handleFilterGenres(e){
-  //   console.log(e.target.value);
-  //   setGenre(e.target.value)
-  //   dispatch(filterVideogamesByGenres(currentGenre, currentOrder, currentSource));
-  // };
   function handleFilterGenres(e){
     dispatch(filterVideogamesByGenres(e.target.value));
   };
@@ -81,14 +63,14 @@ const Home = () => {
       <button onClick={e =>handleClick(e)}>Reload Videogames</button>
       <div>
         <div>
-        <select  onChange = {e => handleOrder(e)}>{/*  onChange = {e => handleOrder(e)} */}
+        <select  onChange = {e => handleOrder(e)}>
           <option value="Select order" key="s"> Select order </option>
           <option value="Ascendent" key="a"> Ascendent </option>
           <option value="Descendent" key="d"> Descendent </option>
         </select>
         </div>
         <div>
-        <select onChange={e => handleFilterSource(e)}> {/* onChange={e => handleSource(e)} */}
+        <select onChange={e => handleFilterSource(e)}>
           <option value="All Sources" key="s">All Sources</option>
           <option value="Existent" key="a">Existent</option>
           <option value="Created" key="d">Created</option>
@@ -104,20 +86,6 @@ const Home = () => {
           }
           </select>
           </div>
-        {/* <div>
-        <select onChange={e => handleFilterGenres(e)}>
-          < option value="All Genres" key={2} > Select Genre</option>
-          { currentGenre === "All Genres" ? (
-            allGenres?.map(genre => {
-              return (
-                < option value={genre.name} key={Math.random()+1} >{genre.name}</option>
-              )
-            })
-          ) : 
-          < option value={currentGenre} key={1} >{currentGenre}</option>
-          }
-          </select>
-          </div> */}
         <SearchBar/>
         <Pagination
         videogamesPerPage={videogamesPerPage}
@@ -128,11 +96,7 @@ const Home = () => {
         {
           currentVideogames?.map( videogame => {
             return (
-              <div key={Math.random()} className={s.vCard}>
-                <Link to={/videogame/}>
-                  <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={Math.random()} id={videogame.id}/>
-                </Link>
-              </div>
+                  <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={videogame.id} id={videogame.id}/>
             );
           })
         }
