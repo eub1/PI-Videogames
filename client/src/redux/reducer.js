@@ -81,6 +81,7 @@ const rootReducer = (state = initialState, action) => {
         videogames:  genresFiltered,
       };
     case GET_VIDEOGAME_DETAIL:
+      console.log("videogameDetail", action.payload);
       return {
         ...state,
         videogameDetail: action.payload,
