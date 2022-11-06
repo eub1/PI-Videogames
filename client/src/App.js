@@ -22,7 +22,7 @@ function App() {
       <Route exact path='/pagination' component={Pagination} />
       <Route exact path='/create' component={VideogameCreate} />
       <Route
-        path="/videogame/:id"
+        exact path="/videogame/:id"
         render={({ match }) => <VideogameDetail id={match.params.id} />}
       />
       </Switch>
