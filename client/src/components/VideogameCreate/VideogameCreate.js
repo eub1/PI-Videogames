@@ -55,16 +55,18 @@ const VideogameCreate = () => {
     if(e.target.checked){
       setInput({
         ...input, 
-        status: e.target.value
+        status: e.target.checked
       })
     }
   };
 
   const handleSelect = (e)=>{
+    if(!input.platforms.includes(e.target.value)){
     setInput({
       ...input,
       platforms: [...input.platforms, e.target.value]
     });
+  }
     console.log(input);
   }; //guarda en un arreglo todo lo que voy seleccionando
 
