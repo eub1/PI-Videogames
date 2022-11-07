@@ -1,0 +1,17 @@
+.videogameCard_main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 400px;
+  height: 400px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: rgba(7, 4, 4, 70%);
+}
+
+.videogameCard_main img {
+  margin-top: 15px;
+  border-radius: 20px;
+}
