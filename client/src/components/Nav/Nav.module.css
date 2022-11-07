@@ -1,0 +1,7 @@
+.nav_main{
+  display: flex;
+  width: auto;
+  justify-content: center;
+  margin:auto;
+  padding: 30px;
+}

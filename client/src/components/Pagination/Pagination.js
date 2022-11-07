@@ -1,4 +1,5 @@
 import React from 'react';
+import s from './pagination.module.css'
 
 const Pagination = ({videogamesPerPage, allVideogames, paginado}) => {
   const pageNumber =[]
@@ -7,8 +8,8 @@ const Pagination = ({videogamesPerPage, allVideogames, paginado}) => {
   }
 
   return (
-    <nav >
-      <ul className='paginado'>
+    <nav className={s.pagination_main}>
+      <ul className={s.pagination_ul}>
         {
           pageNumber?.map((number, index) =>(
             <li key={Math.random()} className='number'>
