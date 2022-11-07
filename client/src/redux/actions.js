@@ -9,6 +9,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const FILTER_BY_GENRES = "FILTER_BY_GENRES";
 export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_RATING = "ORDER_BY_RATING";
 
 
 //* ------------------------------------------ VIDEOGAMES ------------------------------------------
@@ -116,6 +117,12 @@ export const filterSource = (payload)=>{
 export const orderByName = (payload)=>{
   return {
     type: ORDER_BY_NAME,
+    payload
+}};
+
+export const orderByRating = (payload)=>{
+  return {
+    type: ORDER_BY_RATING,
     payload
 }};
 
