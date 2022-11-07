@@ -23,7 +23,7 @@ const VideogameDetail = (props) => {
           <h3>Released date: {idVideogame["released"]}</h3>
           <h3>Rating: {idVideogame["rating"]}</h3>
           <h3>Platforms: {idVideogame["platforms"]?.map(p => p + " ")}</h3>
-          <h3>Genres: {idVideogame["genre"]}</h3>
+          <h3>Genres: {idVideogame["genre"]?.map(g => g + " ")}</h3>
        <Link to='/home'>Home</Link>
     </div>
   )
