@@ -2,7 +2,7 @@ import s from './home.module.css';
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource, orderByName } from '../../redux/actions';
+import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource, orderByName, orderByRating } from '../../redux/actions';
 import {Link} from 'react-router-dom';
 import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
@@ -19,6 +19,7 @@ const Home = () => {
   //LOCAL STATES
   //ORDEN
   const [currentOrder, setOrder] = useState("Select order");
+  const [currentRating, setRating] = useState("Select order");
 
   //PAGINADO
   const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
@@ -47,26 +48,42 @@ const Home = () => {
     setCurrentPage(1); // al ordenar, seteame la pag en la primera.
     setOrder(`${e.target.value} order`) // seteo este estado local, para que haga la modificacion del estado
   }
+  
+  function handleRatingOrder(e){
+    e.preventDefault();
+    dispatch(orderByRating(e.target.value));
+    setCurrentPage(1);
+    setRating(e.target.value)
+  }
 
   function handleFilterGenres(e){
     dispatch(filterVideogamesByGenres(e.target.value));
+    setCurrentPage(1);
   };
 
   function handleFilterSource(e){
-    dispatch(filterSource(e.target.value))
+    dispatch(filterSource(e.target.value));
+    setCurrentPage(1);
   };
 
   return (
-    <>
+    <div className={s.background_Home}>
       <Link to='/create'>Create New Videogame</Link>
       <h1>PAGE TITLE: Im in Home</h1>
-      <button onClick={e =>handleClick(e)}>Reload Videogames</button>
-      <div>
+      <button onClick={e =>handleClick(e)} id="reloadButton">Reload Videogames</button>
+      <div className={s.homeFilters}>
         <div>
         <select  onChange = {e => handleOrder(e)}>
           <option value="Select order" key="s"> Order by Videogame name </option>
           <option value="Ascendent" key="a"> A-Z </option>
           <option value="Descendent" key="d"> Z-A </option>
+        </select>
+        </div>
+        <div>
+        <select  onChange = {e => handleRatingOrder(e)}>
+          <option value="Select order" key="s"> Order by Videogame rating </option>
+          <option value="BestRated" key="a"> 0-1 </option>
+          <option value="WorstRated" key="d"> 1-0 </option>
         </select>
         </div>
         <div>
@@ -102,7 +119,7 @@ const Home = () => {
         }
         </div>
       </div>
-    </>
+    </div>
   )
 
 };
