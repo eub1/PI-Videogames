@@ -1,4 +1,4 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME, ORDER_BY_RATING} from './actions';
 
 const initialState = {
   videogames: [],
@@ -11,6 +11,10 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 
   switch(action.type){
+    case "POST_VIDEOGAME":
+      return {
+        ...state,
+      };
     case GET_VIDEOGAMES:
       return {
         ...state,
@@ -22,6 +26,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videogames: action.payload, // [array de videojuegos]
       };
+    case GET_VIDEOGAME_DETAIL:
+      console.log("videogameDetail", action.payload);
+      return {
+        ...state,
+        videogameDetail: action.payload,
+      };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        videogameDetail: {},
+      };
     case GET_GENRES:
       return {
         ...state,
@@ -32,30 +47,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         platforms: action.payload,
       };
-    case ORDER_BY_NAME:
-      let sortedArray = action.payload === "Ascendent" ?
-      state.videogames.sort(function(a,b) {
-            if(a.name > b.name){ return 1; }
-            if(a.name < b.name){ return -1; }
-            return 0
-          }) : 
-      state.videogames.sort(function(a,b) {
-            if(a.name > b.name){ return -1; }
-            if(a.name < b.name){ return 1; }
-            return 0
-          }); // return 0, si son iguales, los deja igual
-      return {
-        ...state,
-        videogames: sortedArray,
-      };
-    case FILTER_BY_SOURCE:
-      const all_Videogames = state.all_videogames;
-      const sourceFiltered = action.payload === "Created" ? all_Videogames?.slice(100) : all_Videogames?.slice(0,100);
-
-      return {
-        ...state,
-        videogames: action.payload === "All Sources" ? state.all_videogames : sourceFiltered
-      }
     case FILTER_BY_GENRES:
       const allVideogames = state.all_videogames;
       // if(action.source === "Existent"){ allVideogames.filter( v => v.id.length < 15)};
@@ -80,21 +71,46 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videogames:  genresFiltered,
       };
-    case GET_VIDEOGAME_DETAIL:
-      console.log("videogameDetail", action.payload);
+      case FILTER_BY_SOURCE:
+        const all_Videogames = state.all_videogames;
+        const sourceFiltered = action.payload === "Created" ? all_Videogames?.slice(100) : all_Videogames?.slice(0,100);
+  
+      return {
+          ...state,
+          videogames: action.payload === "All Sources" ? state.all_videogames : sourceFiltered
+      };
+    case ORDER_BY_NAME:
+      let sortedArray = action.payload === "Ascendent" ?
+      state.videogames.sort(function(a,b) {
+            if(a.name > b.name){ return 1; }
+            if(a.name < b.name){ return -1; }
+            return 0
+          }) : 
+      state.videogames.sort(function(a,b) {
+            if(a.name > b.name){ return -1; }
+            if(a.name < b.name){ return 1; }
+            return 0
+          }); // return 0, si son iguales, los deja igual
       return {
         ...state,
-        videogameDetail: action.payload,
+        videogames: sortedArray,
       };
-    case CLEAN_DETAIL:
-      return {
-        ...state,
-        videogameDetail: {},
-      };
-    case "POST_VIDEOGAME":
-      return {
-        ...state,
-      };
+      case ORDER_BY_RATING:
+        let sortedRating = action.payload === "BestRated" ?
+        state.videogames.sort(function(a,b) {
+              if(a.name > b.name){ return 1; }
+              if(a.name < b.name){ return -1; }
+              return 0
+            }) : 
+        state.videogames.sort(function(a,b) {
+              if(a.name > b.name){ return -1; }
+              if(a.name < b.name){ return 1; }
+              return 0
+            }); // return 0, si son iguales, los deja igual
+        return {
+          ...state,
+          videogames: sortedRating,
+        };
     default:
       return { ...state };
   }
