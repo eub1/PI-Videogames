@@ -1,29 +1,35 @@
 import React, {useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogameDetail } from '../../redux/actions'
+import { getVideogameDetail, cleanDetail } from '../../redux/actions';
+import s from './videogameDetail.module.css'
 
 
 const VideogameDetail = (props) => {
   console.log(props);
   const {id} = useParams();
-  const videogame = useSelector((state) => state.videogameDetail);
+  const idVideogame = useSelector((state) => state.videogameDetail);
   const dispatch = useDispatch();
   
   useEffect(() => {
     dispatch(getVideogameDetail(id))
+    return ()=>{
+      dispatch(cleanDetail())
+  }
   },[dispatch]);
   
   
   return(
-     <div>
-          <h1>{videogame["name"]}</h1>
-          <img src={videogame["image"] && videogame["image"]} alt="" width="400px" heigth="350px"/>
-          <h4>{videogame["description"]}</h4>
-          <h3>Released date: {videogame["released"]}</h3>
-          <h3>Rating: {videogame["rating"] && videogame["rating"]}</h3>
-          <h3>Platforms: {videogame["platforms"]?.map(p => p + " ")}</h3>
-          <h3>Genres: {videogame["genre"]?.map(g => g + " ")}</h3>
+     <div className={s.detail_Main}>
+      <div className={s.detail_Container}>
+          <h1>{idVideogame["name"]}</h1>
+          <img src={idVideogame["image"] && idVideogame["image"]} alt="" width="400px" heigth="350px"/>
+          <h4>{idVideogame["description"]}</h4>
+          <h3>Released date: {idVideogame["released"]}</h3>
+          <h3>Rating: {idVideogame["rating"] && idVideogame["rating"]}</h3>
+          <h3>Platforms: {idVideogame["platforms"]?.map(p => p + " ")}</h3>
+          <h3>Genres: {idVideogame["genre"]?.map(g => g + " ")}</h3>
+      </div>
        <Link to='/home'>Home</Link>
     </div>
   )
