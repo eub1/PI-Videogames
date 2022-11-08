@@ -169,7 +169,7 @@ const VideogameCreate = () => {
         </div>
         <div>
           <label htmlFor='rating'>Rating:</label>
-          <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)}/>
+          <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)} min={1} max ={5}/>
           {errors.rating && (<p className='error'>{errors.rating}</p>)}
         </div>
         <div>
