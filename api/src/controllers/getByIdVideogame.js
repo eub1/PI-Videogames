@@ -33,14 +33,7 @@ const getApiIdVideogame = async (id) => {
 
 const getDbIdVideogame = async (id) => {
   const dbVideogame = await Videogame.findByPk(id, { 
-    include: {
-      model: Platform,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
-    },
-    include: {
+      include: {
       model: Genre,
       attributes: ["name"],
       through: {
@@ -54,18 +47,7 @@ const getDbIdVideogame = async (id) => {
    console.log("genreArray", genreArray);
    const formatDbVideogame = {...dbVideogame.dataValues, genre: genreArray};
    delete formatDbVideogame.Genres;
-  //dbVideogame.Videogame?.dataValues?.map(el => {
-  //   return {
-  //     id: el.id,
-  //     name: el.name,
-  //     released: el.released,
-  //     rating: el.rating,
-  //     platforms: el.Platforms?.map((p) => p.name),
-  //     genre: el.Genres?.map((genero) => genero.name)
-  //   }
-  // })
-// console.log(dbVideogame.dataValues, "keys dbVideogame");
-console.log(formatDbVideogame, "formatDbVideogame GET BY ID");
+// console.log(formatDbVideogame, "formatDbVideogame GET BY ID");
 
   return formatDbVideogame;
 }
@@ -79,16 +61,4 @@ const getVideogamebyId = async(id) => {
 
 module.exports = getVideogamebyId;
 
-
-//   const formatApiVideogames = apiVideogames.results.map((videogame) => {
-//     return {
-//       id: videogame.id,
-//       name: videogame.name,
-//       description: videogame["description"],
-//       released: videogame.released,
-//       rating: videogame.rating,
-//       platforms: platformsByName,
-//       genre: videogame.genres.map((genero) => genero.name)
-//     }
-//   });
 
