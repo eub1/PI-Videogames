@@ -77,19 +77,21 @@ const VideogameCreate = () => {
 
   const handlePlatformsSelect = (e)=>{
     if(!input.platforms.includes(e.target.value)){
-    setInput({
-      ...input,
-      platforms: [...input.platforms, e.target.value]
-    });
-  }
+      setInput({
+        ...input,
+        platforms: [...input.platforms, e.target.value]
+      });
+      setErrors(validate(input));
+    }
   }; 
   const handleGenresSelect = (e)=>{
     if(!input.genres.includes(e.target.value)){
-    setInput({
-      ...input,
-      genres: [...input.genres, e.target.value]
-    });
-  }
+      setInput({
+        ...input,
+        genres: [...input.genres, e.target.value]
+      });
+      setErrors(validate(input));
+    }
   }; 
   const handleDelete = (value) =>{
     if(input.platforms.includes(value)){
@@ -117,7 +119,7 @@ const VideogameCreate = () => {
     e.preventDefault();
     setErrors(validate(input));
     dispatch(postVideogame(input));
-    // alert para avisar al usuario que se creo el personaje
+
     alert("Videogame created");
     setInput({
       name: "",
@@ -127,8 +129,8 @@ const VideogameCreate = () => {
       platforms: [],
       genres: []
     });
-    history.push('/home') //useHistory, metodo del router que me redirige a la ruta que le digo. Ya se creo el vidoegame, ahora llevame al home
-  }; //guarda en un arreglo todo lo que voy seleccionando
+    history.push('/home') 
+  }; 
 
 
 
