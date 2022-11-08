@@ -42,14 +42,15 @@ router.get('/', async(req, res) => {
 
 router.post('/', async (req, res) => {
  console.log(req.body);
-  const {name, description, released, rating, platforms, genres} = req.body
- 
+  const {name, description, released, rating, platforms, genres, createdInDb} = req.body
+  let image = req.body.image
   try {
 
     if (!name || !description || !platforms.length) {
       return res.status(404).send("Please complete the required fields");
     };
-    const createdVideogame = await createVideogame(name, description, released, rating, platforms, genres);
+    if(!image) image = "https://i.blogs.es/28d521/the-last-of-us-remastered-review_8pkg.1280/1366_521.jpeg";
+    const createdVideogame = await createVideogame(name, image, description, released, rating, platforms, genres, createdInDb);
     console.log("createdVideogame in POST '/' ");
     
     res.status(201).send( createdVideogame );
