@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import s from "./landingPage.module.css";
+import s from "./LandingPage.module.css";
 // import Logo from '../../../../videogame.png'
 
 export default function LandingPage(){
