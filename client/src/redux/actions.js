@@ -99,15 +99,6 @@ export const filterVideogamesByGenres = (genreName) => {
     }
 };
 
-// export const filterVideogamesByGenres = (genreName, value, source) => {
-//   return {
-//       type: FILTER_BY_GENRES,
-//       payload: genreName,
-//       value,
-//       source
-//     }
-// };
-
 export const filterSource = (payload)=>{
   return {
     type: FILTER_BY_SOURCE,
