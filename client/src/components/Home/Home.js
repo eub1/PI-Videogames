@@ -46,7 +46,7 @@ const Home = () => {
     e.preventDefault();
     dispatch(orderByName(e.target.value));
     setCurrentPage(1); // al ordenar, seteame la pag en la primera.
-    setOrder(`${e.target.value} order`) // seteo este estado local, para que haga la modificacion del estado
+    setOrder(e.target.value) // seteo este estado local, para que haga la modificacion del estado
   }
   
   function handleRatingOrder(e){
@@ -81,8 +81,8 @@ const Home = () => {
         <div>
         <select  onChange = {e => handleRatingOrder(e)}>
           <option value="Select order" key="s"> Order by Videogame rating </option>
-          <option value="BestRated" key="a"> 0-1 </option>
-          <option value="WorstRated" key="d"> 1-0 </option>
+          <option value="BestRated" key="a"> 1-5 </option>
+          <option value="WorstRated" key="d"> 5-1 </option>
         </select>
         </div>
         <div>
@@ -125,12 +125,6 @@ const Home = () => {
 
 export default Home;
 
-/* 
-option: siempre necesita value, para que pueda acceder y preguntar despues.
- - dentro del select, tengo opciones(que tienen value).
-  - ese value, es asc? => hace esto, si es desc? => hace esto
-
-*/
 
 /* 
          <option value="1">Action</option>
