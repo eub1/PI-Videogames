@@ -18,13 +18,13 @@ const rootReducer = (state = initialState, action) => {
     case GET_VIDEOGAMES:
       return {
         ...state,
-        videogames: action.payload, // [array de videojuegos]
+        videogames: action.payload,
         all_videogames: action.payload
       };
     case GET_BY_NAME_VIDEOGAMES:
       return {
         ...state,
-        videogames: action.payload, // [array de videojuegos]
+        videogames: action.payload,
       };
     case GET_VIDEOGAME_DETAIL:
       console.log("videogameDetail", action.payload);
@@ -98,15 +98,15 @@ const rootReducer = (state = initialState, action) => {
       case ORDER_BY_RATING:
         let sortedRating = action.payload === "BestRated" ?
         state.videogames.sort(function(a,b) {
-              if(a.name > b.name){ return 1; }
-              if(a.name < b.name){ return -1; }
+              if(a.rating > b.rating){ return 1; }
+              if(a.rating < b.rating){ return -1; }
               return 0
             }) : 
         state.videogames.sort(function(a,b) {
-              if(a.name > b.name){ return -1; }
-              if(a.name < b.name){ return 1; }
+              if(a.rating > b.rating){ return -1; }
+              if(a.rating < b.rating){ return 1; }
               return 0
-            }); // return 0, si son iguales, los deja igual
+            });
         return {
           ...state,
           videogames: sortedRating,
