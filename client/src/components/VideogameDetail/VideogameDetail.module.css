@@ -22,17 +22,17 @@
   color: antiquewhite;
 }
 
-.detailCard img{
+.detail_Container img{
   margin-top: 15px;
   border-radius: 20px;
 }
 
-.detailCard h3{
+.detail_Container h3{
   margin: auto;
   padding: 0;
 }
 
-#detailButton{
+#detail_button {
   background-color: rgba(6, 0, 7, 60%);
   padding: 12px;
   border-radius: 10px;
@@ -49,7 +49,7 @@
   text-decoration: none;
 }
 
-#detailButton:hover {
+#detail_button:hover {
   background-color: rgba(102, 0, 122, 60%);
   color: antiquewhite;
   box-shadow: 6px 5px 24px #666666;
