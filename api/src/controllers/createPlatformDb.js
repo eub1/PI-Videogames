@@ -20,7 +20,7 @@ const getAllPlatforms = async () => {
   
   const fetchedDbPlatforms = []
   arrayFoundCreatedPlatforms.forEach( item => fetchedDbPlatforms.push({id: item[0].dataValues.id, name: item[0].dataValues.name}))
-  console.log("fetchedDbPlatforms", fetchedDbPlatforms);
+  // console.log("fetchedDbPlatforms", fetchedDbPlatforms);
   return fetchedDbPlatforms;
 
 };
