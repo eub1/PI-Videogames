@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 
-// id | name | description | released | rating | platforms
 
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
@@ -18,6 +17,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    image: {
+      type: DataTypes.STRING,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -31,6 +33,11 @@ module.exports = (sequelize) => {
     platforms: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
+    },
+    createdInDb:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   },
   {timestamps: false}
