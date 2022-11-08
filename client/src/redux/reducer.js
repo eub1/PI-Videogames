@@ -1,4 +1,4 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME, ORDER_BY_RATING, POST_VIDEOGAME} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME, ORDER_BY_RATING} from './actions';
 
 const initialState = {
   videogames: [],
@@ -11,10 +11,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
 
   switch(action.type){
-    case POST_VIDEOGAME:
-      return {
-        ...state,
-      };
     case GET_VIDEOGAMES:
       return {
         ...state,
