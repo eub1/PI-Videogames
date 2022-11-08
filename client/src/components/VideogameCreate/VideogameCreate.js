@@ -1,32 +1,32 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import {postVideogame, getPlatforms} from '../../redux/actions';
-import axios from "axios";
+import {postVideogame, getPlatforms, getGenres} from '../../redux/actions';
+// import axios from "axios";
 
 
 function validate(input){
   let errors = {};
   const blanks = /^\s+$/
-  const validateLetters = /^[0-9a-zA-Z ']+$/
+  const validateLetters = /^[0-9a-zA-Z ]+$/
 
-  if (!input.name || input.name.length === 0) {
+  if (!input.name || input.name?.length === 0) {
     errors.name = 'Please enter the videogame Name';
-  } else if (input.name.length > 20 ) {
+  } else if (input.name?.length > 20 ) {
     errors.name = "The name cannot have more than 20 characters"
-  } else if (input.name.match(blanks)){
+  } else if (input.name?.match(blanks)) {
     errors.name = "The name cannot be blank spaces"
-  } else if(!input.name.match(validateLetters)) {
+  } else if (!input.name?.match(validateLetters)) {
     errors.name = "You can only use alphanumeric characters"
-  } else if(!input.description || input.description.length > 300){
+  } else if (!input.description || input.description?.length > 300) {
     errors.description = "Please write a description, no longer than 300 characters"
-  } else if(input.description.match(blanks) || !input.desccription.match(validateLetters)){
-    errors.description = "The description text cannot contain only blank spaces, you can only use alphanumeric characters"
+  } else if (input.description?.match(blanks)) {
+    errors.description = "The description text cannot contain only blank spaces"
   } else if (input.rating < 1 || input.rating > 5  ) {
     errors.rating = "The videogame can have a rating between 1 and 5"
-  } else if(input.platforms.length === 0) {
+  } else if(input.platforms?.length === 0) {
     errors.platforms = "Please choose at least one platform"
-  } else if(input.genres.length === 0) {
+  } else if(input.genres?.length === 0) {
     errors.genres = "Please choose at least one genre"
   } 
   return errors;
@@ -38,26 +38,29 @@ const VideogameCreate = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const allVideogames = useSelector((state) => state.all_videogames)
   const platforms = useSelector((state) => state.platforms);
   const allGenres = useSelector((state) => state.genres);
   const [ errors, setErrors] = useState({});
-
-  // const {name, description, released, rating, platforms, genres} = req.body
   const [input, setInput] = useState({
     name: "",
     description: "",
     released: "",
-    rating: "",
+    rating: 0,
     platforms: [],
     genres: []
   });
 
+  const allNames = allVideogames.map(v => v.name);
+
   useEffect(()=>{
     dispatch(getPlatforms());
+    dispatch(getGenres())
   }, [dispatch]);
 
+  //* ------- HANDLE INPUT -------
   const handleChange = (e)=>{
-
+ 
     setInput({
       ...input,
       [e.target.name]: e.target.value
@@ -66,8 +69,11 @@ const VideogameCreate = () => {
       ...input,
       [e.target.name]: e.target.value
     }));
+    
     console.log(input);
   };
+
+  //* -------SELECT / DELETE- PALTFORMS & GENRES -------
 
   const handlePlatformsSelect = (e)=>{
     if(!input.platforms.includes(e.target.value)){
@@ -85,25 +91,7 @@ const VideogameCreate = () => {
     });
   }
   }; 
-
-  const handleSubmit = (e)=>{
-   e.preventDefault();
-    dispatch(postVideogame(input));
-    // alert para avisar al usuario que se creo el personaje
-    alert("Videogame created");
-    setInput({
-      name: "",
-      description: "",
-      released: "",
-      rating: "",
-      platforms: [],
-      genres: []
-    });
-    history.push('/home') //useHistory, metodo del router que me redirige a la ruta que le digo. Ya se creo el vidoegame, ahora llevame al home
-  }; //guarda en un arreglo todo lo que voy seleccionando
-
   const handleDelete = (value) =>{
-
     if(input.platforms.includes(value)){
       return setInput({
         ...input,
@@ -118,6 +106,32 @@ const VideogameCreate = () => {
     }
   };
 
+  //*
+  const handleErrorsCheck = (e) => {
+    setErrors(validate(input));
+  }
+
+  //*------- SUBMIT FORM-------
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    setErrors(validate(input));
+    dispatch(postVideogame(input));
+    // alert para avisar al usuario que se creo el personaje
+    alert("Videogame created");
+    setInput({
+      name: "",
+      description: "",
+      released: "",
+      rating: 0,
+      platforms: [],
+      genres: []
+    });
+    history.push('/home') //useHistory, metodo del router que me redirige a la ruta que le digo. Ya se creo el vidoegame, ahora llevame al home
+  }; //guarda en un arreglo todo lo que voy seleccionando
+
+
+
 
   return(
     <div>
@@ -125,25 +139,27 @@ const VideogameCreate = () => {
       <h1>Create you Videogame</h1>
       <form onSubmit = {e => handleSubmit(e)}>
         <div>
-          <label>Name:</label>
+          <label htmlFor="name">Name:</label>
           <input type="text" value= {input.name} name= "name" onChange = {e => handleChange(e)}/>
+          { allNames.includes(input.name) ? "This videogame already exists, please create a different one" : null }
           {errors.name && (<p className='error'>{errors.name}</p>)}
         </div>
         <div>
-          <label>Description:</label>
+          <label htmlFor="description">Description:</label>
           <input type="text" value= {input.description} name= "description" onChange = {e => handleChange(e)}/>
           {errors.description && (<p className='error'>{errors.description}</p>)}
         </div>
         <div>
-          <label>Released date:</label>
+          <label htmlFor='released'>Released date:</label>
           <input type="date" value= {input.released} name= "released" onChange = {e => handleChange(e)}/>
         </div>
         <div>
-          <label>Rating:</label>
+          <label htmlFor='rating'>Rating:</label>
           <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)}/>
+          {errors.rating && (<p className='error'>{errors.rating}</p>)}
         </div>
         <div>
-          <label>Image:</label>
+          <label htmlFor='image'>Image:</label>
           <input type="text" value= {input.image} name= "image" onChange = {e => handleChange(e)}/>
         </div>
         <div>
@@ -160,7 +176,8 @@ const VideogameCreate = () => {
               <button className='buttonX' onClick={()=>handleDelete(p)}>x</button>
             </div>)
           }
-          </div>
+           {errors.platforms && (<p className='error'>{errors.platforms}</p>)}
+        </div>
         <div>
           <label>Genres:</label>
           <select onChange = {e => handleGenresSelect(e)}>
@@ -175,9 +192,14 @@ const VideogameCreate = () => {
                   <button className='buttonX' onClick={()=>handleDelete(g)}>x</button>
                 </div>)
             }
+             {errors.genres && (<p className='error'>{errors.genres}</p>)}
         </div>
-        <button type='submit' >Create Videogame</button>
+        { Object.keys(errors).length > 0 ?
+        <button type="submit" disabled={true} key={Math.random()}>Cannot Submit, complete fields as required</button> :
+        <button type='submit' key={Math.random()} >Create Videogame</button>
+        }
       </form>
+      <button type="button" onClick = {e=> handleErrorsCheck(e)}>Check errors</button>
     </div>
   )
 };

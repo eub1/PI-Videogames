@@ -46,10 +46,9 @@ router.post('/', async (req, res) => {
  
   try {
 
-    if (!name || !description || !platforms) {
+    if (!name || !description || !platforms.length) {
       return res.status(404).send("Please complete the required fields");
     };
-
     const createdVideogame = await createVideogame(name, description, released, rating, platforms, genres);
     console.log("createdVideogame in POST '/' ");
     
