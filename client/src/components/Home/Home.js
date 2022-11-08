@@ -12,7 +12,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   //GLOBAL STATES
-  const allVideogames = useSelector((state) => state.videogames) // mapStateToProps (trae todo lo que esta en el estado de videogames)
+  const allVideogames = useSelector((state) => state.videogames)
   const allGenres = useSelector((state) => state.genres)
 
 
@@ -35,7 +35,7 @@ const Home = () => {
   useEffect(()=>{
     dispatch(getAllVideogames()); //component did mount, al montar, despacha esta accion
     dispatch(getGenres());
-  },[]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
+  },[dispatch]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
 
   function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
     e.preventDefault();
