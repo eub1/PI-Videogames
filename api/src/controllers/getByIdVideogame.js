@@ -48,10 +48,26 @@ const getDbIdVideogame = async (id) => {
       },
     },
   });
+ 
 
-console.log(dbVideogame, "dbgames");
+   const genreArray = dbVideogame.dataValues?.Genres?.map( g => g.name)
+   console.log("genreArray", genreArray);
+   const formatDbVideogame = {...dbVideogame.dataValues, genre: genreArray};
+   delete formatDbVideogame.Genres;
+  //dbVideogame.Videogame?.dataValues?.map(el => {
+  //   return {
+  //     id: el.id,
+  //     name: el.name,
+  //     released: el.released,
+  //     rating: el.rating,
+  //     platforms: el.Platforms?.map((p) => p.name),
+  //     genre: el.Genres?.map((genero) => genero.name)
+  //   }
+  // })
+// console.log(dbVideogame.dataValues, "keys dbVideogame");
+console.log(formatDbVideogame, "formatDbVideogame GET BY ID");
 
-  return dbVideogame;
+  return formatDbVideogame;
 }
 
 const getVideogamebyId = async(id) => {
