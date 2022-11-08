@@ -7,26 +7,31 @@ import axios from "axios";
 
 function validate(input){
   let errors = {};
-  if(!input.name){
-    errors.name = 'Name required';
-  } else if(!input.description){
-    errors.description = "Description required"
+  const blanks = /^\s+$/
+  const validateLetters = /^[0-9a-zA-Z ']+$/
+
+  if (!input.name || input.name.length === 0) {
+    errors.name = 'Please enter the videogame Name';
+  } else if (input.name.length > 20 ) {
+    errors.name = "The name cannot have more than 20 characters"
+  } else if (input.name.match(blanks)){
+    errors.name = "The name cannot be blank spaces"
+  } else if(!input.name.match(validateLetters)) {
+    errors.name = "You can only use alphanumeric characters"
+  } else if(!input.description || input.description.length > 300){
+    errors.description = "Please write a description, no longer than 300 characters"
+  } else if(input.description.match(blanks) || !input.desccription.match(validateLetters)){
+    errors.description = "The description text cannot contain only blank spaces, you can only use alphanumeric characters"
+  } else if (input.rating < 1 || input.rating > 5  ) {
+    errors.rating = "The videogame can have a rating between 1 and 5"
+  } else if(input.platforms.length === 0) {
+    errors.platforms = "Please choose at least one platform"
+  } else if(input.genres.length === 0) {
+    errors.genres = "Please choose at least one genre"
   } 
   return errors;
 };
 
-const validateRegEx = ()=>{
-  const validateLetters = /^[A-Za-z ]+$/
-  const blanks = /^\s+$/
-
-  // setErrors({...errors,name:
-  //     input.name.length>5 && input.name.match(validateLetters) ? "" : "error en el name"
-  // });
-
-  // setErrors({...errors,email:
-  //     input.email.length>10 && input.email.match(mailformat) ? "" : "error en el mail"
-  // });
-}
 
 
 const VideogameCreate = () => {
@@ -35,6 +40,7 @@ const VideogameCreate = () => {
   const history = useHistory();
   const platforms = useSelector((state) => state.platforms);
   const allGenres = useSelector((state) => state.genres);
+  const [ errors, setErrors] = useState({});
 
   // const {name, description, released, rating, platforms, genres} = req.body
   const [input, setInput] = useState({
@@ -45,8 +51,6 @@ const VideogameCreate = () => {
     platforms: [],
     genres: []
   });
-
-  const [ errors, setErrors] = useState({});
 
   useEffect(()=>{
     dispatch(getPlatforms());
