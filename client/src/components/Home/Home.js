@@ -68,7 +68,7 @@ const Home = () => {
 
   return (
     <div className={s.background_Home}>
-      <h1>PAGE TITLE: Im in Home</h1>
+      <h1>Choose a Videogame</h1>
       <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
       <div className={s.homeFilters}>
         <div>
