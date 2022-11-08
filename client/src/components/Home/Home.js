@@ -1,4 +1,4 @@
-import s from './home.module.css';
+import s from './Home.module.css';
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
