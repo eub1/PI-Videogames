@@ -40,14 +40,7 @@ const getApiVideogames = async () => {
 const getDbVideogames = async () => {
   const dbVideogames = await Videogame.findAll({
     // attributes: ['id', 'name', 'released', 'rating'],
-    include: {
-      model: Platform,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
-    },
-    include: {
+      include: {
       model: Genre,
       attributes: ["name"],
       through: {
@@ -61,10 +54,12 @@ const getDbVideogames = async () => {
     return {
       id: el.id,
       name: el.name,
+      image: el.image,
       released: el.released,
       rating: el.rating,
-      platforms: el.Platforms?.map((p) => p.name),
-      genre: el.Genres?.map((genero) => genero.name)
+      platforms: el.platforms?.map((p) => p.name),
+      genre: el.Genres?.map((genero) => genero.name),
+      createdInDb: el.createdInDb
     }
   })
 
