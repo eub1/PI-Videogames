@@ -15,6 +15,7 @@ const Home = () => {
   const allVideogames = useSelector((state) => state.videogames) // mapStateToProps (trae todo lo que esta en el estado de videogames)
   const allGenres = useSelector((state) => state.genres)
 
+
   //LOCAL STATES
   //ORDEN
   const [currentOrder, setOrder] = useState("Select order");
