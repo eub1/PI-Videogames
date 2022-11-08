@@ -6,18 +6,17 @@ import s from './videogameDetail.module.css'
 
 
 const VideogameDetail = (props) => {
-  console.log(props);
+
   const {id} = useParams();
-  const idVideogame = useSelector((state) => state.videogameDetail);
+
   const dispatch = useDispatch();
-  
-  useEffect(() => {
+    useEffect(() => {
     dispatch(getVideogameDetail(id))
     return ()=>{
       dispatch(cleanDetail())
   }
   },[dispatch]);
-  
+  const idVideogame = useSelector((state) => state.videogameDetail);
   
   return(
      <div className={s.detail_Main}>
