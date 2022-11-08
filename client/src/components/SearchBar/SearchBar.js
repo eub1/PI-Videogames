@@ -18,8 +18,8 @@ const SearchBar = () => {
   const handleSubmit = (e)=>{
     e.preventDefault();
     dispatch(getByNameVideogames(name))
-    console.log(name); // name es mi estado local, donde voy guardando lo que escribe el usuario, y con el dispatch, la accion le llega al reducer
-    // setName() --> setName con state vacio para que se borre lo que queda en el searchBar
+    console.log(name); 
+    setName();
   };
 
 
