@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import {postVideogame, getPlatforms, getGenres} from '../../redux/actions';
-// import axios from "axios";
+import {getAllVideogames, getPlatforms, getGenres} from '../../redux/actions';
+import axios from "axios";
 
 
 function validate(input){
@@ -115,22 +115,35 @@ const VideogameCreate = () => {
 
   //*------- SUBMIT FORM-------
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
     setErrors(validate(input));
-    dispatch(postVideogame(input));
+   
+    try {
+        const response = await axios.post("http://localhost:3001/videogames", input)
+        console.log("response.data",response.data);
+        console.log("response", response);
+        if(response.status >= 200 && response.status <=205){
+          dispatch(getAllVideogames())
+          alert("Videogame created");
+          setInput({
+            name: "",
+            description: "",
+            released: "",
+            rating: 0,
+            platforms: [],
+            genres: []
+          });
+          history.push(`/videogame/${response.data.id}`) 
+        } else {
+          alert("Something went wrong, please try again")
+        }
+      } catch (error) {
+        alert(`Something went wrong. ${error.message}`)
+      }
+    };
+  
 
-    alert("Videogame created");
-    setInput({
-      name: "",
-      description: "",
-      released: "",
-      rating: 0,
-      platforms: [],
-      genres: []
-    });
-    history.push('/home') 
-  }; 
 
 
 
