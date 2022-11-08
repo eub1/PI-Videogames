@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import SearchBar from "../SearchBar/SearchBar";
-import s from './nav.module.css'
+import s from './Nav.module.css'
 // import Logo from '../../../../videogame.png'
 
 const Nav = () => {
