@@ -49,24 +49,8 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_BY_GENRES:
       const allVideogames = state.all_videogames;
-      // if(action.source === "Existent"){ allVideogames.filter( v => v.id.length < 15)};
-      // if(action.source === "Created"){ allVideogames.filter( v => v.id.length > 15)};
-      // if(action.value === "Ascendent"){
-      //   allVideogames.sort(function(a,b) {
-      //     if(a.name > b.name){ return 1; }
-      //     if(a.name < b.name){ return -1; }
-      //     return 0
-      //   });
-      // } else if(action.value === "Descendent"){
-      //   allVideogames.sort(function(a,b) {
-      //     if(a.name > b.name){ return -1; }
-      //     if(a.name < b.name){ return 1; }
-      //     return 0
-      //   });
-      // };
       const genresFiltered = (action.payload === "All Genres") ? allVideogames : allVideogames.filter( v => v.genre.includes(action.payload));
-      // const uniqueGenresFiltered = [...new Set(genresFiltered)]
-      // console.log(uniqueGenresFiltered);
+
       return {
         ...state,
         videogames:  genresFiltered,
@@ -90,7 +74,7 @@ const rootReducer = (state = initialState, action) => {
             if(a.name > b.name){ return -1; }
             if(a.name < b.name){ return 1; }
             return 0
-          }); // return 0, si son iguales, los deja igual
+          });
       return {
         ...state,
         videogames: sortedArray,
