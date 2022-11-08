@@ -57,11 +57,11 @@ const rootReducer = (state = initialState, action) => {
       };
       case FILTER_BY_SOURCE:
         const all_Videogames = state.all_videogames;
-        const sourceFiltered = action.payload === "Created" ? all_Videogames?.slice(100) : all_Videogames?.slice(0,100);
+        const sourceFiltered = action.payload === "Created" ? all_Videogames.filter( v => v.createdInDb) : all_Videogames.filter( v => !v.createdInDb);
   
       return {
           ...state,
-          videogames: action.payload === "All Sources" ? state.all_videogames : sourceFiltered
+          videogames: sourceFiltered
       };
     case ORDER_BY_NAME:
       let sortedArray = action.payload === "Ascendent" ?
