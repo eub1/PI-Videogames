@@ -41,7 +41,7 @@ router.get('/', async(req, res) => {
 // recibe por body los datos recolectados desde el formulario (de la ruta de )
 
 router.post('/', async (req, res) => {
-  // console.log(req.body);
+ console.log(req.body);
   const {name, description, released, rating, platforms, genres} = req.body
  
   try {
