@@ -1,5 +1,4 @@
 import axios from 'axios';
-export const POST_VIDEOGAME = "POST_VIDEOGAME";
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_BY_NAME_VIDEOGAMES = "GET_BY_NAME_VIDEOGAMES";
 export const GET_GENRES = "GET_GENRES";
@@ -12,20 +11,6 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
 
 //* ------------------------------------------ VIDEOGAMES ------------------------------------------
-
-// const {name, description, released, rating, platforms, genres} = req.body
-export const postVideogame = (payload) =>{
-  return function (dispatch){
-    axios
-    .post("http://localhost:3001/videogames", payload)
-    .then((response) => {
-      // console.log(response.data);
-      return response.data;
-    })
-    .then(() => dispatch({ type: POST_VIDEOGAME }))
-    .catch((error) => console.log(error));
-  };
-};
 
 export const getAllVideogames = () =>{
   return function (dispatch){
