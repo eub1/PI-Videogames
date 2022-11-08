@@ -14,9 +14,10 @@ import VideogameDetail from './components/VideogameDetail/VideogameDetail';
 function App() {
   return (
     <div className="App">
-      <Route path='/' component={Nav}/>
-      <Route exact path='/' component={LandingPage} />
+    
+      <Route path='/home' component={Nav}/>
       <Switch>
+      <Route exact path='/' component={LandingPage} />
       <Route exact path='/home' component={Home} />
       <Route exact path='/videogames' component={VideogameCard} />
       <Route exact path='/pagination' component={Pagination} />
