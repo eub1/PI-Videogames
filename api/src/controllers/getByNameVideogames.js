@@ -49,9 +49,11 @@ const getByNameVideogames = async (name) => {
     return {
       id: videogame.dataValues.id,
       name: videogame.dataValues.name,
+      image: videogame.dataValues.image,
       released: videogame.dataValues.released,
       rating: videogame.dataValues.rating,
-      genres: videogame.dataValues?.Genres?.map((genero) => genero.name) // undefined
+      genres: videogame.dataValues?.Genres?.map((genero) => genero.name),
+      createdInDb: videogame.dataValues.createdInDb
     }
   })
   // console.log("fetchedDBVideogames", fetchedDBVideogames);
