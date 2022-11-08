@@ -1,7 +1,11 @@
 .nav_main{
+  background-color: rgba(7, 4, 4, 70%);
   display: flex;
   width: auto;
-  justify-content: center;
-  margin:auto;
-  padding: 30px;
+  justify-content: space-between;
+  margin: 5px 15px;
+  margin-top: 15px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  text-decoration: none;
 }

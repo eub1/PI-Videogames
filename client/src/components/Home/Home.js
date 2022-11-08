@@ -3,10 +3,9 @@ import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource, orderByName, orderByRating } from '../../redux/actions';
-import {Link} from 'react-router-dom';
 import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
-import SearchBar from "../SearchBar/SearchBar";
+
 
 
 const Home = () => {
@@ -23,7 +22,7 @@ const Home = () => {
 
   //PAGINADO
   const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
-  const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+  const [videogamesPerPage] = useState(15);
   const indexOfLastVideogame = currentPage * videogamesPerPage;
   const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
   const currentVideogames = allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame)
@@ -68,9 +67,8 @@ const Home = () => {
 
   return (
     <div className={s.background_Home}>
-      <Link to='/create'>Create New Videogame</Link>
       <h1>PAGE TITLE: Im in Home</h1>
-      <button onClick={e =>handleClick(e)} id="reloadButton">Reload Videogames</button>
+      <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
       <div className={s.homeFilters}>
         <div>
         <select  onChange = {e => handleOrder(e)}>
@@ -103,7 +101,6 @@ const Home = () => {
           }
           </select>
           </div>
-        <SearchBar/>
         <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}
