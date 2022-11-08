@@ -6,9 +6,9 @@ const {
 } = process.env;
 
 
-const createVideogame = async (name, description, released, rating, platforms, genres) => {
+const createVideogame = async (name, image, description, released, rating, platforms, genres, createdInDb) => {
 
-  const formVideogame = await Videogame.create({name, description, released, rating, platforms});
+  const formVideogame = await Videogame.create({name, image, description, released, rating, platforms, createdInDb});
 
   //jointTable GENRES
   const foundGenres = await Genre.findAll({
@@ -19,25 +19,9 @@ const createVideogame = async (name, description, released, rating, platforms, g
  
   await formVideogame.addGenres(foundGenres);
 
-  //jointTable PLATFORMS
-  const foundPlatforms = await Platform.findAll({
-    where:{
-      name: platforms
-    }
-  })
- 
-  await formVideogame.addPlatforms(foundPlatforms);
-
   const newVideogame = await Videogame.findOne({
     where: {
       name: name,
-    },
-    include: {
-      model: Platform,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
     },
     include: {
       model: Genre,
