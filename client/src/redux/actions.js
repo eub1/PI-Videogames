@@ -15,20 +15,20 @@ export const ORDER_BY_RATING = "ORDER_BY_RATING";
 
 // const {name, description, released, rating, platforms, genres} = req.body
 export const postVideogame = (payload) =>{
-  return async function (dispatch){
+  return function (dispatch){
     axios
     .post("http://localhost:3001/videogames", payload)
     .then((response) => {
       // console.log(response.data);
       return response.data;
     })
-    .then((data) => dispatch({ type: POST_VIDEOGAME }))
+    .then(() => dispatch({ type: POST_VIDEOGAME }))
     .catch((error) => console.log(error));
   };
 };
 
 export const getAllVideogames = () =>{
-  return async function (dispatch){
+  return function (dispatch){
     axios
     .get("http://localhost:3001/videogames")
     .then((response) => {
@@ -39,7 +39,7 @@ export const getAllVideogames = () =>{
   };
 };
 export const getByNameVideogames = (name) =>{
-  return async function (dispatch){
+  return function (dispatch){
     axios
     .get(`http://localhost:3001/videogames?name=${name}`)
     .then((response) => {
@@ -51,7 +51,7 @@ export const getByNameVideogames = (name) =>{
 };
 
 export const getVideogameDetail = (id) => {
-  return async function (dispatch) {
+  return function (dispatch) {
     axios
       .get(`http://localhost:3001/videogame/${id}`)
       .then((resp) => dispatch({ type: GET_VIDEOGAME_DETAIL, payload: resp.data }))
