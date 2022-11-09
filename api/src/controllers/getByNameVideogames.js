@@ -21,7 +21,7 @@ const getByNameVideogames = async (name) => {
       image: videogame["background_image"],
       released: videogame.released,
       rating: videogame.rating,
-      genres: videogame.genres?.map((genero) => genero.name)
+      genre: videogame.genres?.map((genero) => genero.name)
     }
   })
 
@@ -52,7 +52,7 @@ const getByNameVideogames = async (name) => {
       image: videogame.dataValues.image,
       released: videogame.dataValues.released,
       rating: videogame.dataValues.rating,
-      genres: videogame.dataValues?.Genres?.map((genero) => genero.name),
+      genre: videogame.dataValues?.Genres?.map((genero) => genero.name),
       createdInDb: videogame.dataValues.createdInDb
     }
   })
