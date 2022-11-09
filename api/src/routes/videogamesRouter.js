@@ -22,9 +22,9 @@ router.get('/', async(req, res) => {
     // console.log("name", name, typeof name);
     if(name){
         const byNameVideogames = await getByNameVideogames(name);
-        //  console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
-         byNameVideogames.length ? res.status(200).send(byNameVideogames) : res.status(404).send("Game not found, please try again or create a new one")}
-    else {
+        // console.log("byNameVideogames", byNameVideogames.length, byNameVideogames);
+         res.status(200).send(byNameVideogames);
+    } else {
         const videogames = await getAllVideogames();
         // console.log("videogames",videogames.length, videogames,"videogames",videogames.length);
         return res.status(200).send(videogames);
@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
       return res.status(404).send("Please complete the required fields");
     };
     const createdVideogame = await createVideogame(name, image, description, released, rating, platforms, genres, createdInDb);
-    console.log("createdVideogame in POST '/' ");
+    // console.log("createdVideogame in POST '/' ");
     
     res.status(201).send( createdVideogame );
 
