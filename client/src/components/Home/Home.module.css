@@ -61,13 +61,12 @@
   background-color: transparent;
 }
 
-/* .pages_container{
-  display: flex;
-  flex-direction: row;
-  justify-content:center;
-  color: antiquewhite;
+.pages_container h2{
+  color: rgb(253, 251, 253);
+  font-weight: lighter;
+  font-family: Arial;
 }
- */
+ 
 .vCard_container{
   display: flex;
   flex-wrap: wrap;
