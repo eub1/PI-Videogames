@@ -62,7 +62,7 @@ const rootReducer = (state = initialState, action) => {
   
       return {
           ...state,
-          videogames: sourceFiltered
+          videogames: action.payload === "All Sources" ? all_Videogames : sourceFiltered
       };
     case ORDER_BY_NAME:
       let sortedArray = action.payload === "Ascendent" ?
