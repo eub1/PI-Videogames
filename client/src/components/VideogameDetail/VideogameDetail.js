@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogameDetail, cleanDetail } from '../../redux/actions';
 import s from './videogameDetail.module.css'
+import loading from '../../assets/200w.gif'
 
 
 const VideogameDetail = (props) => {
@@ -16,9 +17,10 @@ const VideogameDetail = (props) => {
       dispatch(cleanDetail())
   }
   },[dispatch]);
+
   const idVideogame = useSelector((state) => state.videogameDetail);
-  
-  return(
+  if(idVideogame.image){
+  return (
      <div className={s.detail_Main}>
       <div className={s.detail_Container}>
           <h1>{idVideogame["name"]}</h1>
@@ -32,6 +34,16 @@ const VideogameDetail = (props) => {
        <Link to='/home'><button id="detail_button">Home</button></Link>
     </div>
   )
+} else {
+  return (
+    <div className={s.loading}>
+      <h2>Loading...</h2>
+      <img src={loading} alt=""/>
+    </div>
+    )
 }
+
+};
+
 
 export default VideogameDetail;
