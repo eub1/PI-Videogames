@@ -144,9 +144,6 @@ const VideogameCreate = () => {
     };
   
 
-
-
-
   return(
     <div>
       <Link to='/home'><button>Home</button></Link>
