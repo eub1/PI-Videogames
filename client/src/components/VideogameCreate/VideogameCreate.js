@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import {getAllVideogames, getPlatforms, getGenres} from '../../redux/actions';
 import axios from "axios";
+import s from "../VideogameCreate/videogameCreate.module.css"
 
 
 function validate(input){
@@ -145,36 +146,35 @@ const VideogameCreate = () => {
   
 
   return(
-    <div>
-      <Link to='/home'><button>Home</button></Link>
-      <h1>Create you Videogame</h1>
-      <form onSubmit = {e => handleSubmit(e)}>
+    <div className={s.videogameCreate_Main}>
+      <h1>Create your Videogame</h1>
+      <form onSubmit = {e => handleSubmit(e)} className={s.form}>
         <div>
-          <label htmlFor="name">Name:</label>
+          <label htmlFor="name">Name:</label><br/>
           <input type="text" value= {input.name} name= "name" onChange = {e => handleChange(e)}/>
           { allNames.includes(input.name) ? "This videogame already exists, please create a different one" : null }
           {errors.name && (<p className='error'>{errors.name}</p>)}
         </div>
         <div>
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="description">Description:</label><br/>
           <input type="text" value= {input.description} name= "description" onChange = {e => handleChange(e)}/>
           {errors.description && (<p className='error'>{errors.description}</p>)}
         </div>
         <div>
-          <label htmlFor='released'>Released date:</label>
+          <label htmlFor='released'>Released date:</label><br/>
           <input type="date" value= {input.released} name= "released" onChange = {e => handleChange(e)}/>
         </div>
         <div>
-          <label htmlFor='rating'>Rating:</label>
+          <label htmlFor='rating'>Rating:</label><br/>
           <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)} min={1} max ={5}/>
           {errors.rating && (<p className='error'>{errors.rating}</p>)}
         </div>
         <div>
-          <label htmlFor='image'>Image:</label>
+          <label htmlFor='image'>Image:</label><br/>
           <input type="text" value= {input.image} name= "image" onChange = {e => handleChange(e)}/>
         </div>
         <div>
-          <label>Platforms: </label>
+          <label>Platforms: </label><br/>
           <select onChange = {e => handlePlatformsSelect(e)} >
              {platforms?.map(plataforma =>(
                 <option value={plataforma.name} key={plataforma.id}>{plataforma.name}</option>
@@ -190,7 +190,7 @@ const VideogameCreate = () => {
            {errors.platforms && (<p className='error'>{errors.platforms}</p>)}
         </div>
         <div>
-          <label>Genres:</label>
+          <label>Genres:</label><br/>
           <select onChange = {e => handleGenresSelect(e)}>
             {allGenres?.map(genero =>(
               <option value={genero.name} key={genero.id}>{genero.name}</option>
@@ -204,13 +204,14 @@ const VideogameCreate = () => {
                 </div>)
             }
              {errors.genres && (<p className='error'>{errors.genres}</p>)}
-        </div>
+        </div><br/>
         { Object.keys(errors).length > 0 ?
         <button type="submit" disabled={true} key={Math.random()}>Cannot Submit, complete fields as required</button> :
         <button type='submit' key={Math.random()} >Create Videogame</button>
         }
-      </form>
+      </form><br/>
       <button type="button" onClick = {e=> handleErrorsCheck(e)}>Check errors</button>
+      <Link to='/home'><button>Home</button></Link>
     </div>
   )
 };

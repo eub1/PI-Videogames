@@ -1,0 +1,44 @@
+.videogameCreate_Main {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: auto;
+  margin: 8px;
+  padding: 10px 100px;
+}
+
+.videogameCreate_Main h1{
+  color:rgba(7, 4, 4, 60%);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  height: auto;
+  margin: 20px;
+  padding: 15px 45px;
+  border-radius: 10px;
+  background-color: rgba(7, 4, 4, 60%);
+  color: antiquewhite;
+  text-align: left;
+}
+.form label {
+  padding-right: 18px;
+}
+
+.form input{
+  border-radius: 3px;
+  border-style: none;
+  cursor: pointer;
+}
+.form select {
+  border-radius: 3px;
+  border-style: none;
+  cursor: pointer;
+}
