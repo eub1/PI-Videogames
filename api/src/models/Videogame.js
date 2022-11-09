@@ -19,6 +19,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
+      defaultValue: "https://i.blogs.es/28d521/the-last-of-us-remastered-review_8pkg.1280/1366_521.jpeg",
     },
     description: {
       type: DataTypes.TEXT,
