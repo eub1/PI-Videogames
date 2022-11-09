@@ -33,13 +33,13 @@ const VideogameDetail = (props) => {
         </div>
           <h3>Platforms: <ul>{
           idVideogame["platforms"]?.map(p => (
-          <li>{p}</li>
+          <li key={p}>{p}</li>
           ))
           }</ul>
           </h3>
           <h3>Genres: <ul>{
           idVideogame["genre"]?.map(g => (
-          <li>{g}</li>
+          <li key={g}>{g}</li>
           ))
           }</ul>
           </h3>
