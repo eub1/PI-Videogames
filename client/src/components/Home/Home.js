@@ -18,8 +18,8 @@ const Home = () => {
 
   //LOCAL STATES
   //ORDEN
-  const [currentOrder, setOrder] = useState("Select order");
-  const [currentRating, setRating] = useState("Select order");
+  const [order, setOrder] = useState("Select order");
+  const [rating, setRating] = useState("Select order");
 
   //PAGINADO
   const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
