@@ -44,14 +44,14 @@ const Home = () => {
     dispatch(getAllVideogames());
   };
 
-  function handleOrder(e){
+  function handleSortByName(e){
     e.preventDefault();
     dispatch(orderByName(e.target.value));
     setCurrentPage(1); // al ordenar, seteame la pag en la primera.
     setOrder(e.target.value) // seteo este estado local, para que haga la modificacion del estado
   }
   
-  function handleRatingOrder(e){
+  function handleSortByRating(e){
     e.preventDefault();
     dispatch(orderByRating(e.target.value));
     setCurrentPage(1);
@@ -74,14 +74,14 @@ const Home = () => {
       <h1>Choose a Videogame</h1>
       <div className={s.homeFilters}>
         <div>
-        <select  onChange = {e => handleOrder(e)}>
+        <select  onChange = {handleSortByName}>
           <option value="Select order" key="s"> Sort by name </option>
           <option value="Ascendent" key="a"> A-Z </option>
           <option value="Descendent" key="d"> Z-A </option>
         </select>
         </div>
         <div>
-        <select  onChange = {e => handleRatingOrder(e)}>
+        <select  onChange = {handleSortByRating}>
           <option value="Select order" key="s"> Sort by rating </option>
           <option value="BestRated" key="a"> 0-5 </option>
           <option value="WorstRated" key="d"> 5-0 </option>
