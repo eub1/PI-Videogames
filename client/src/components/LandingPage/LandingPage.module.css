@@ -10,28 +10,37 @@
   color: #e2dddd;
 };
 
-.background_Landing h3{
-  margin-top: 20px;
-  font-size: 50px;
-  text-align: left;
+.landing_message {
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: center;
+}
+.landing_message h3{
+  margin: 20px 70px;
+  font-size: 20px;
+  text-align: left;
+  text-shadow: 3px 2px 1px rgba(162, 202, 3, 0.7);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 
 
 #button_Landing{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: transparent;
   border-radius: 3px;
-  border-style: none;
+  border-style:solid;
   color:rgba(73, 124, 114, 0.7);
   opacity: 0.4;
   cursor: pointer;
   font-size: 25px;
+  margin: 20px 70px;
   margin-top: 160px;
-  text-shadow: 3px 2px 1px rgba(73, 124, 114, 0.7);
-  font-family: Arial;
-  padding: 19px;
+  text-shadow: 3px 2px 1px rgba(225, 244, 84, 0.7);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 9px;
   text-decoration: none;
 }
 
