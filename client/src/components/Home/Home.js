@@ -72,16 +72,16 @@ const Home = () => {
       <div className={s.homeFilters}>
         <div>
         <select  onChange = {e => handleOrder(e)}>
-          <option value="Select order" key="s"> Order by Videogame name </option>
+          <option value="Select order" key="s"> Sort by name </option>
           <option value="Ascendent" key="a"> A-Z </option>
           <option value="Descendent" key="d"> Z-A </option>
         </select>
         </div>
         <div>
         <select  onChange = {e => handleRatingOrder(e)}>
-          <option value="Select order" key="s"> Order by Videogame rating </option>
-          <option value="BestRated" key="a"> 1-5 </option>
-          <option value="WorstRated" key="d"> 5-1 </option>
+          <option value="Select order" key="s"> Sort by rating </option>
+          <option value="BestRated" key="a"> 0-5 </option>
+          <option value="WorstRated" key="d"> 5-0 </option>
         </select>
         </div>
         <div>

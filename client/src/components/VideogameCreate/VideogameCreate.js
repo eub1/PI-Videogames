@@ -23,8 +23,8 @@ function validate(input){
     errors.description = "Please write a description, no longer than 300 characters"
   } else if (input.description?.match(blanks)) {
     errors.description = "The description text cannot contain only blank spaces"
-  } else if (input.rating < 1 || input.rating > 5  ) {
-    errors.rating = "The videogame can have a rating between 1 and 5"
+  } else if (input.rating < 0 || input.rating > 5  ) {
+    errors.rating = "The videogame can have a rating between 0 and 5"
   } else if(input.platforms?.length === 0) {
     errors.platforms = "Please choose at least one platform"
   } else if(input.genres?.length === 0) {
@@ -166,7 +166,7 @@ const VideogameCreate = () => {
         </div>
         <div>
           <label htmlFor='rating'>Rating:</label><br/>
-          <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)} min={1} max ={5}/>
+          <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)} min={0} max ={5}/>
           {errors.rating && (<p className='error'>{errors.rating}</p>)}
         </div>
         <div>
