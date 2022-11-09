@@ -69,7 +69,6 @@ const Home = () => {
   return (
     <div className={s.background_Home}>
       <h1>Choose a Videogame</h1>
-      <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
       <div className={s.homeFilters}>
         <div>
         <select  onChange = {e => handleOrder(e)}>
@@ -102,11 +101,14 @@ const Home = () => {
           }
           </select>
           </div>
+        <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
+        <div className={s.pages_container}>
         <Pagination
         videogamesPerPage={videogamesPerPage}
         allVideogames={allVideogames.length}
         paginado={paginado}
         />
+        </div>
         <div className = {s.vCard_container}>
         {
           currentVideogames?.map( videogame => {
