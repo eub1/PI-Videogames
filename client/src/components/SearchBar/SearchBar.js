@@ -12,14 +12,14 @@ const SearchBar = () => {
   const handleInputChange = (e)=>{
     e.preventDefault();
     setName(e.target.value)
-    console.log(name);
+    // console.log(name);
   };
 
   const handleSubmit = (e)=>{
     e.preventDefault();
     dispatch(getByNameVideogames(name))
-    console.log(name); 
-    setName();
+    console.log("name on search Bar", name); 
+    setName("");
   };
 
 
@@ -27,10 +27,11 @@ const SearchBar = () => {
     <div className={s.searchBar_main}>
       <input 
       type="text"
-      placeholder="Search..."
+      value={name}
+      placeholder="Search Game..."
       onChange = {e=> handleInputChange(e)}
       />
-      <button type="submit" onClick= {e => handleSubmit(e)}>Search</button>
+      <button type="submit" onClick= {e => handleSubmit(e)}> Search </button>
     </div>
   )
 };
