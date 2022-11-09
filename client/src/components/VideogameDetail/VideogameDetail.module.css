@@ -1,5 +1,4 @@
 .detail_Main {
-  background: url("../../assets/game.jpg");
   background-size: cover;
   background-position: center center;
   width: 100%;
@@ -10,16 +9,16 @@
 .detail_Container {
   display: flex;
   flex-direction: column;
-  justify-content: center center;
+  justify-content:center;
   align-items: center;
-  width: 500px;
+  width: auto;
   height: auto;
-  margin-top: 50px;
-  margin-left: 500px;
-  padding: 10px;
-  border-radius: 20px;
+  margin: 8px 20px;
+  padding: 10px 40px;
+  border-radius: 10px;
   background-color: rgba(7, 4, 4, 60%);
   color: antiquewhite;
+  text-align: left;
 }
 
 .detail_Container img{
@@ -27,9 +26,9 @@
   border-radius: 20px;
 }
 
-.detail_Container h3{
+.detail_Container h3 {
   margin: auto;
-  padding: 0;
+  padding: 8px;
 }
 
 #detail_button {
@@ -55,4 +54,14 @@
   box-shadow: 6px 5px 24px #666666;
   transition-delay: 0.2s;
   transition: 0.8s;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  margin: 30px 20px;
+  padding: 10px 40px;
+  border-radius: 10px;
 }
