@@ -81,13 +81,14 @@ const rootReducer = (state = initialState, action) => {
         videogames: sortedArray,
       };
       case ORDER_BY_RATING:
+        
         let sortedRating = action.payload === "BestRated" ?
-        state.videogames.sort(function(a,b) {
+        state.videogames?.sort(function(a,b) {
               if(a.rating > b.rating){ return 1; }
               if(a.rating < b.rating){ return -1; }
               return 0
             }) : 
-        state.videogames.sort(function(a,b) {
+        state.videogames?.sort(function(a,b) {
               if(a.rating > b.rating){ return -1; }
               if(a.rating < b.rating){ return 1; }
               return 0
