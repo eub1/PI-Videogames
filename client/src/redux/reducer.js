@@ -1,7 +1,7 @@
-import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME, ORDER_BY_RATING} from './actions';
+import {GET_VIDEOGAMES, GET_BY_NAME_VIDEOGAMES,GET_GENRES, GET_PLATFORMS, GET_VIDEOGAME_DETAIL, CLEAN_DETAIL, FILTER_BY_GENRES, FILTER_BY_SOURCE, ORDER_BY_NAME, ORDER_BY_RATING, SET_VIDEOGAMES_TO_LOADING} from './actions';
 
 const initialState = {
-  videogames: [],
+  videogames: {},
   all_videogames: [],
   genres: [],
   videogameDetail: {},
@@ -18,6 +18,11 @@ const rootReducer = (state = initialState, action) => {
         all_videogames: action.payload
       };
     case GET_BY_NAME_VIDEOGAMES:
+      return {
+        ...state,
+        videogames: action.payload,
+      };
+    case SET_VIDEOGAMES_TO_LOADING:
       return {
         ...state,
         videogames: action.payload,
