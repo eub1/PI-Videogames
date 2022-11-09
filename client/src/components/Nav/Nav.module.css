@@ -3,9 +3,10 @@
   display: flex;
   width: auto;
   justify-content: space-between;
-  margin: 5px 15px;
+  align-items: center;
+  margin: 5px 1px;
   margin-top: 15px;
   padding: 15px 25px;
-  border-radius: 5px;
+  border-radius: 3px;
   text-decoration: none;
 }
