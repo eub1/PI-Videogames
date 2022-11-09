@@ -11,7 +11,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   //GLOBAL STATES
-  const allVideogames = useSelector((state) => state.videogames)
+  const videogames = useSelector((state) => state.videogames)
   const allGenres = useSelector((state) => state.genres)
 
   //LOCAL STATES
@@ -20,15 +20,18 @@ const Home = () => {
   const [rating, setRating] = useState("Select order");
 
   //PAGINADO
-  const [currentPage, setCurrentPage] = useState(1); // empieza en 1, porque siempre empiezo en la primer pagina
-  const [videogamesPerPage] = useState(15);
-  const indexOfLastVideogame = currentPage * videogamesPerPage;
-  const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
-  const currentVideogames = allVideogames.slice(indexOfFirstVideogame, indexOfLastVideogame)
-  
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [videogamesPerPage] = useState(15);
+    const indexOfLastVideogame = currentPage * videogamesPerPage;
+    const indexOfFirstVideogame = indexOfLastVideogame - videogamesPerPage;
+    let currentVideogames = [];
+    const paginado = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
+    if(Array.isArray(videogames) && videogames.length > 0){
+      currentVideogames = videogames.slice(indexOfFirstVideogame, indexOfLastVideogame)
+    }
 
   useEffect(()=>{
     dispatch(getAllVideogames());
@@ -102,15 +105,23 @@ const Home = () => {
           </div>
         <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
         <div className={s.pages_container}>
-        <Pagination
-        videogamesPerPage={videogamesPerPage}
-        allVideogames={allVideogames.length}
-        paginado={paginado}
-        />
+          { Array.isArray(videogames) && videogames.length > 0 ?
+            <Pagination
+            videogamesPerPage={videogamesPerPage}
+            videogames={videogames.length}
+            paginado={paginado}
+            /> 
+          : null
+          }
+          {
+            Array.isArray(videogames) && videogames.length === 0 ?
+            <h2>No videogames found</h2>
+            : null
+          }
         </div>
         <div className = {s.vCard_container}>
         {
-          currentVideogames?.map( videogame => {
+          Array.isArray(currentVideogames) && currentVideogames.length > 0 && currentVideogames?.map( videogame => {
             return (
                   <VideogameCard name= {videogame.name} image= {videogame.image} released= {videogame.released} rating= {videogame.rating} genre={videogame.genre} key={videogame.id} id={videogame.id}/>
             );
