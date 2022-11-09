@@ -37,3 +37,13 @@
 .videogameCard_ul li{
   list-style: none;
 }
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  margin: 30px 20px;
+  padding: 10px 40px;
+  border-radius: 10px;
+} 
