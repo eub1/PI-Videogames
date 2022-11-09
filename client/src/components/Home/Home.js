@@ -2,7 +2,7 @@ import s from './Home.module.css';
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource, orderByName, orderByRating } from '../../redux/actions';
+import { getAllVideogames, getGenres, filterVideogamesByGenres, filterSource, orderByName, orderByRating, setVideogamesToLoading } from '../../redux/actions';
 import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
 
@@ -34,6 +34,7 @@ const Home = () => {
     }
 
   useEffect(()=>{
+    dispatch(setVideogamesToLoading());
     dispatch(getAllVideogames());
     dispatch(getGenres());
   },[dispatch]);
@@ -105,6 +106,14 @@ const Home = () => {
           </div>
         <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
         <div className={s.pages_container}>
+          {
+            videogames?.loading && 
+            <h2>Loading...</h2>
+          }
+          {
+            videogames?.error &&
+            <h2>{videogames.error}</h2>
+          }
           { Array.isArray(videogames) && videogames.length > 0 ?
             <Pagination
             videogamesPerPage={videogamesPerPage}
