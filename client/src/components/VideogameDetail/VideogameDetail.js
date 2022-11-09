@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { getVideogameDetail, cleanDetail } from '../../redux/actions';
-import s from './videogameDetail.module.css'
+import s from './VideogameDetail.module.css'
 import loading from '../../assets/200w.gif'
 
 
