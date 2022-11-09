@@ -16,3 +16,25 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.pagination_ul button{
+  background-color: rgba(73, 124, 114, 0.7);
+  padding: 12px;
+  border-radius: 3px;
+  border-color: rgb(226, 223, 226);
+  border-style: none;
+  cursor: pointer;
+  
+  color: rgb(253, 251, 253);
+  font-weight: lighter;
+  font-size: 12px;
+  font-family: Arial;
+  text-decoration: none;
+}
+
+.pagination_ul button:hover{
+  background-color: rgba(32, 24, 34, 0.7); 
+  box-shadow: 6px 5px 24px #666666;
+  transition-delay: 0.2s;
+  transition: 0.8s;
+}

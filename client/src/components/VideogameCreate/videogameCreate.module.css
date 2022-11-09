@@ -1,6 +1,8 @@
 .videogameCreate_Main {
+  background-image: url("../../assets/theLastOfUs.jpeg");
+  background-attachment: fixed;   
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,13 +11,11 @@
   height: auto;
   margin: 8px;
   padding: 10px 100px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 
 .videogameCreate_Main h1{
-  color:rgba(7, 4, 4, 60%);
+  color: antiquewhite;
 }
 
 .form {
@@ -30,6 +30,9 @@
   background-color: rgba(7, 4, 4, 60%);
   color: antiquewhite;
   text-align: left;
+}
+.form:hover{
+  background-color: rgba(73, 124, 114, 0.7);
 }
 .form label {
   padding-right: 18px;

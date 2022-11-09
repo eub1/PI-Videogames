@@ -1,8 +1,26 @@
 
 .searchBar_main input, button {
-  margin-left: 5px;
+  margin-left: 6px;
   padding: 5px 5px;
   border-radius: 3px;
   border-color: rgb(226, 223, 226);
   border-width: 0.1em;
+}
+
+.searchBar_main button{
+  background-color: rgba(73, 124, 114, 0.7);
+  border-style: none;
+  cursor: pointer;
+  color: rgb(253, 251, 253);
+  font-weight: lighter;
+  font-size: 15px;
+  font-family: Arial;
+  text-decoration: none;
+}
+
+.searchBar_main  button:hover{
+  background-color: rgba(32, 24, 34, 0.7); 
+  box-shadow: 6px 5px 24px #666666;
+  transition-delay: 0.2s;
+  transition: 0.8s;
 }

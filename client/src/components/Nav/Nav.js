@@ -7,9 +7,9 @@ import s from './Nav.module.css'
 const Nav = () => {
   return(
     <div className={s.nav_main}>
-    <Link to='/home'>Home</Link>
+    <Link to='/home'> <button>Home</button> </Link>
     <SearchBar/>
-    <Link to='/create'>Create New Videogame</Link>
+    <Link to='/create'><button>Create New Videogame</button>  </Link>
     </div>
   )
 }

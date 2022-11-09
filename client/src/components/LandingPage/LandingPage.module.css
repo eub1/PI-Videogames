@@ -5,28 +5,34 @@
   background-position: center center;
   width: auto;
   height: 1200px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+  color: #e2dddd;
+};
+
+.background_Landing h1{
+  font-size: 50px;
 }
 
 
 #button_Landing{
-  border-radius: 28px;
+  border-radius: 3px;
   border-style: none;
-  background-image: url("../../assets/videogame.png");
-  color: #fafafa;
+  color:rgba(73, 124, 114, 0.7);
   opacity: 0.4;
   cursor: pointer;
-  font-size: 30px;
-  margin-top: 170px;
-  text-shadow: 3px 2px 1px #9daef5;
+  font-size: 25px;
+  margin-top: 60px;
+  text-shadow: 3px 2px 1px rgba(73, 124, 114, 0.7);
   font-family: Arial;
   padding: 19px;
   text-decoration: none;
 }
 
 #button_Landing:hover {
-  background-image: url("../../assets/videogame.png");
   opacity: 1;
-  color: #ffffff;
+  color: #e2dddd;
   box-shadow: 6px 5px 24px #666666;
   transition-delay: 0.2s;
   transition: 0.8s;
