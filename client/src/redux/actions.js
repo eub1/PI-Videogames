@@ -9,7 +9,7 @@ export const FILTER_BY_GENRES = "FILTER_BY_GENRES";
 export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_RATING = "ORDER_BY_RATING";
-
+export const SET_VIDEOGAMES_TO_LOADING = "SET_VIDEOGAMES_TO_LOADING";
 //* ------------------------------------------ VIDEOGAMES ------------------------------------------
 
 export const getAllVideogames = () =>{
@@ -20,7 +20,7 @@ export const getAllVideogames = () =>{
       return response.data;
     })
     .then((data) => dispatch({ type: GET_VIDEOGAMES, payload: data }))
-    .catch((error) => console.log(error));
+    .catch((error) => dispatch({ type: GET_VIDEOGAMES, payload: {error: error.message} }));
   };
 };
 export const getByNameVideogames = (name) =>{
@@ -31,9 +31,25 @@ export const getByNameVideogames = (name) =>{
       return response.data;
     })
     .then((data) => dispatch({ type: GET_BY_NAME_VIDEOGAMES, payload: data }))
-    .catch((error) => console.log(error));
+    .catch((error) => dispatch({ type: GET_BY_NAME_VIDEOGAMES, payload: {error: error.message} }));
   };
 };
+
+export const setVideogamesToLoading = ()=>{
+  return async function (dispatch){
+   try {
+    return dispatch({
+      type: SET_VIDEOGAMES_TO_LOADING,
+      payload: {loading: true}
+    })
+   } catch (error) {
+    return dispatch({
+      type: SET_VIDEOGAMES_TO_LOADING,
+      payload: {error: error.message}
+    })
+   }
+  }
+}
 
 export const getVideogameDetail = (id) => {
   return function (dispatch) {
