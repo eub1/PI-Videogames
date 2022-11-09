@@ -1,8 +1,8 @@
 
 .searchBar_main input, button {
+  margin-left: 5px;
   padding: 5px 5px;
-  border-radius: 5px;
+  border-radius: 3px;
   border-color: rgb(226, 223, 226);
   border-width: 0.1em;
-  
 }
