@@ -5,11 +5,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 800px;
+  width: auto;
   height: auto;
   margin: 8px;
   padding: 10px 100px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 
 .videogameCreate_Main h1{
   color:rgba(7, 4, 4, 60%);
