@@ -7,14 +7,12 @@ import VideogameCard from '../VideogameCard/VideogameCard';
 import Pagination from '../Pagination/Pagination';
 
 
-
 const Home = () => {
 
   const dispatch = useDispatch();
   //GLOBAL STATES
   const allVideogames = useSelector((state) => state.videogames)
   const allGenres = useSelector((state) => state.genres)
-
 
   //LOCAL STATES
   //ORDEN
@@ -33,11 +31,11 @@ const Home = () => {
   };
 
   useEffect(()=>{
-    dispatch(getAllVideogames()); //component did mount, al montar, despacha esta accion
+    dispatch(getAllVideogames());
     dispatch(getGenres());
-  },[dispatch]) // []  para que no se genere un loop infinito de llamados, si le paso algo, [algo], va a depender de que haya 'algo', para montarse
+  },[dispatch]);
 
-  function handleClick(e){ // para que no se bugguee, se resetea, y trae mas videojuegos
+  function handleClick(e){ 
     e.preventDefault();
     dispatch(getAllVideogames());
   };
@@ -66,6 +64,7 @@ const Home = () => {
     setCurrentPage(1);
   };
 
+ 
   return (
     <div className={s.background_Home}>
       <h1>Choose a Videogame</h1>
