@@ -44,7 +44,7 @@ const getDbIdVideogame = async (id) => {
  
 
    const genreArray = dbVideogame.dataValues?.Genres?.map( g => g.name)
-   console.log("genreArray", genreArray);
+  //  console.log("genreArray", genreArray);
    const formatDbVideogame = {...dbVideogame.dataValues, genre: genreArray};
    delete formatDbVideogame.Genres;
 // console.log(formatDbVideogame, "formatDbVideogame GET BY ID");
