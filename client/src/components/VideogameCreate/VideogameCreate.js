@@ -91,7 +91,7 @@ const VideogameCreate = () => {
           ...input,
           [e.target.name]: e.target.value
         }));
-      }, 1000);
+      }, 2000);
     }
   }; 
   const handleGenresSelect = (e)=>{
@@ -105,7 +105,7 @@ const VideogameCreate = () => {
           ...input,
           [e.target.name]: e.target.value
         }));
-      }, 1000);
+      }, 2000);
     }
   }; 
   const handleDelete = (value) =>{
