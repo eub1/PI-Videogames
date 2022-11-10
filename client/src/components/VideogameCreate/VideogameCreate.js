@@ -66,12 +66,13 @@ const VideogameCreate = () => {
       ...input,
       [e.target.name]: e.target.value
     });
-    setErrors(validate({
-      ...input,
-      [e.target.name]: e.target.value
-    }));
-    
-    console.log(input);
+    setTimeout(() => {
+      setErrors(validate({
+        ...input,
+        [e.target.name]: e.target.value
+      }));
+    }, 1000);
+
   };
 
   //* -------SELECT / DELETE- PALTFORMS & GENRES -------
@@ -82,7 +83,12 @@ const VideogameCreate = () => {
         ...input,
         platforms: [...input.platforms, e.target.value]
       });
-      setErrors(validate(input));
+      setTimeout(() => {
+        setErrors(validate({
+          ...input,
+          [e.target.name]: e.target.value
+        }));
+      }, 1000);
     }
   }; 
   const handleGenresSelect = (e)=>{
@@ -91,7 +97,12 @@ const VideogameCreate = () => {
         ...input,
         genres: [...input.genres, e.target.value]
       });
-      setErrors(validate(input));
+      setTimeout(() => {
+        setErrors(validate({
+          ...input,
+          [e.target.name]: e.target.value
+        }));
+      }, 1000);
     }
   }; 
   const handleDelete = (value) =>{
@@ -122,8 +133,6 @@ const VideogameCreate = () => {
    
     try {
         const response = await axios.post("http://localhost:3001/videogames", input)
-        console.log("response.data",response.data);
-        console.log("response", response);
         if(response.status >= 200 && response.status <=205){
           dispatch(getAllVideogames())
           alert("Videogame created");
