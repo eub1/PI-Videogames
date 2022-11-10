@@ -8,7 +8,7 @@ export default function LandingPage(){
     <div className={s.background_Landing}>
     
     <Link to='/home'>
-    <button id={s.button_Landing}>Begin...</button>
+    <button id={s.button_Landing}>Start...</button>
     </Link>
     <div className={s.landing_message}>
     <h3>Welcome!</h3>
