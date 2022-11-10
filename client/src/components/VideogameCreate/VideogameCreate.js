@@ -29,7 +29,9 @@ function validate(input){
     errors.platforms = "Please choose at least one platform"
   } else if(input.genres?.length === 0) {
     errors.genres = "Please choose at least one genre"
-  } 
+  } else if(new Date(input.released) > new Date()) {
+    errors.released = "The released date cannot be greater than today"
+  }
   return errors;
 };
 
@@ -175,6 +177,7 @@ const VideogameCreate = () => {
         <div>
           <label htmlFor='released'>Released date:</label><br/>
           <input type="date" value= {input.released} name= "released" onChange = {e => handleChange(e)}/>
+          {errors.released && (<p className='error'>{errors.released}</p>)}
         </div>
         <div>
           <label htmlFor='rating'>Rating:</label><br/>

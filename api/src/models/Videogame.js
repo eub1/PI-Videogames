@@ -27,9 +27,14 @@ module.exports = (sequelize) => {
     },
     released: {
       type: DataTypes.DATEONLY,
+      defaultValue: DataTypes.NOW,
     },
     rating: {
       type: DataTypes.FLOAT,
+      validate: {
+        min: 0,
+        max: 5
+      }
     },
     platforms: {
       type: DataTypes.ARRAY(DataTypes.STRING),
