@@ -56,9 +56,7 @@ const VideogameCreate = () => {
 
   const allNames = allVideogames.map(v => v.name.toLowerCase());
 
-  const current = new Date();
-  const today = `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`
-
+ 
   useEffect(()=>{
     dispatch(getPlatforms());
     dispatch(getGenres())
