@@ -169,7 +169,7 @@ const VideogameCreate = () => {
         </div>
         <div>
           <label htmlFor="description">Description:</label><br/>
-          <input type="text" value= {input.description} name= "description" onChange = {e => handleChange(e)}/>
+          <textarea value= {input.description} name= "description" onChange = {e => handleChange(e)}  rows="5" cols="33"/>
           {errors.description && (<p className='error'>{errors.description}</p>)}
         </div>
         <div>
