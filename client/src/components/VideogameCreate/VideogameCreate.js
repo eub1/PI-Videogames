@@ -210,7 +210,8 @@ const VideogameCreate = () => {
         <button type='submit' key={Math.random()} >Create Videogame</button>
         }
       </form><br/>
-      <button type="button" onClick = {e=> handleErrorsCheck(e)}>Check errors</button>
+      <button type="button" onClick = {e=> handleErrorsCheck(e)}>Validate</button>
+      <br/>
       <Link to='/home'><button>Home</button></Link>
     </div>
   )
