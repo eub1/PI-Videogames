@@ -48,3 +48,9 @@
   border-style: none;
   cursor: pointer;
 }
+
+.form textarea {
+  border-radius: 3px;
+  border-style: none;
+  cursor: pointer;
+}
