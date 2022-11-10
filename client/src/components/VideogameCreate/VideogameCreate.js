@@ -196,8 +196,8 @@ const VideogameCreate = () => {
           {
             input.platforms?.map( p =>
             <div className = 'selected_Delete' key={p}>
-              <p>{p}</p>
-              <button className='buttonX' onClick={()=>handleDelete(p)}>x</button>
+               <br/>
+              <button className='buttonX' onClick={()=>handleDelete(p)}> x </button><span> {p}</span>
             </div>)
           }
            {errors.platforms && (<p className='error'>{errors.platforms}</p>)}
@@ -212,8 +212,8 @@ const VideogameCreate = () => {
             {
               input.genres?.map(g =>
                 <div className = 'selected_Delete' key={g}>
-                  <p>{g}</p>
-                  <button className='buttonX' onClick={()=>handleDelete(g)}>x</button>
+                  <br/>
+                  <button className='buttonX' onClick={()=>handleDelete(g)}> x </button><span>{g}</span>
                 </div>)
             }
              {errors.genres && (<p className='error'>{errors.genres}</p>)}
