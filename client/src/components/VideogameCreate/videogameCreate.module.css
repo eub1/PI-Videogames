@@ -54,3 +54,36 @@
   border-style: none;
   cursor: pointer;
 }
+
+.selected_Delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-right: 20px;
+  margin: 0;
+}
+
+ .buttonX {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(73, 124, 114, 0.7);
+    padding: 12px;
+    border-radius: 3px;
+    border-color: rgb(226, 223, 226);
+    border-style: none;
+    cursor: pointer;
+    
+    color: rgb(253, 251, 253);
+    font-weight: lighter;
+    font-size: 12px;
+    font-family: Arial;
+    text-decoration: none;
+  }
+  
+  .buttonX:hover {
+    background-color: rgba(32, 24, 34, 0.7); 
+    box-shadow: 6px 5px 24px #666666;
+    transition-delay: 0.2s;
+    transition: 0.8s;
+  }
+
