@@ -47,8 +47,8 @@ const Home = () => {
   function handleSortByName(e){
     e.preventDefault();
     dispatch(orderByName(e.target.value));
-    setCurrentPage(1); // al ordenar, seteame la pag en la primera.
-    setOrder(e.target.value) // seteo este estado local, para que haga la modificacion del estado
+    setCurrentPage(1); 
+    setOrder(e.target.value) 
   }
   
   function handleSortByRating(e){
@@ -147,25 +147,3 @@ const Home = () => {
 export default Home;
 
 
-/* 
-         <option value="1">Action</option>
-          <option value="2">Adventure</option>
-          <option value="3">Arcade</option>
-          <option value="4">Board Games</option>
-          <option value="5">Card</option>
-          <option value="6">Casual</option>
-          <option value="9">Educational</option>
-          <option value="11">Family</option>
-          <option value="7">Fighting</option>
-          <option value="8">Indie</option>
-          <option value="10">Massively Multiplayer</option>
-          <option value="12">Platformer</option>
-          <option value="13">Puzzle</option>
-          <option value="14">RPG</option>
-          <option value="15">Racing</option>
-          <option value="16">Shooter</option>
-          <option value="17">Simulation</option>
-          <option value="18">Sports</option>
-          <option value="19">Strategy</option>
-
-*/
