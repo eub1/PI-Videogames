@@ -19,6 +19,7 @@ const Home = () => {
   const [order, setOrder] = useState("Select order");
   const [rating, setRating] = useState("Select order");
 
+
   //PAGINADO
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -42,6 +43,9 @@ const Home = () => {
   function handleClick(e){ 
     e.preventDefault();
     dispatch(getAllVideogames());
+    setTimeout(
+      ()=>{ window.location.href="http://localhost:3000/home" },1000
+      )
   };
 
   function handleSortByName(e){
@@ -67,6 +71,7 @@ const Home = () => {
     dispatch(filterSource(e.target.value));
     setCurrentPage(1);
   };
+
 
  
   return (
