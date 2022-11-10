@@ -94,13 +94,14 @@ const Home = () => {
         </div>
         <div>
         <select onChange={e => handleFilterSource(e)}>
-          <option value="All Sources" key="s">All Sources</option>
+          <option value="All Sources" key="s">Filter by Sources</option>
           <option value="Existent" key="a">Existent</option>
           <option value="Created" key="d">Created</option>
         </select>
         </div>
         <div>
         <select onChange={e => handleFilterGenres(e)}>
+        <option value="All Genres" key="s">Filter by Genres</option>
           { allGenres?.map(genre => {
               return (
                 < option value={genre.name} key={Math.random()} >{genre.name}</option>
