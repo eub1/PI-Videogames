@@ -6,7 +6,7 @@ const {
   RAWG_API_KEY
 } = process.env;
 
-//tags.description_raw
+
 const getApiIdVideogame = async (id) => {
   
   const fetchedData = await axios.get(`https://api.rawg.io/api/games/${id}?key=${RAWG_API_KEY}`);
