@@ -71,7 +71,7 @@ export const getGenres = () => {
     try {
       const apiData = await axios.get("http://localhost:3001/genres");
       const genres = apiData.data;
-      dispatch( { type: GET_GENRES, payload: [ { id: 0, name: "All Genres" }, ...genres ] } );
+      dispatch( { type: GET_GENRES, payload: genres} );
     } catch (error) {
       console.log(error)
     }
@@ -84,7 +84,7 @@ export const getPlatforms = () => {
     try {
       const apiData = await axios.get("http://localhost:3001/platforms");
       const platforms = apiData.data;
-      dispatch( { type: GET_PLATFORMS, payload: [ { id: 0, name: "All Platforms" }, ...platforms ] } );
+      dispatch( { type: GET_PLATFORMS, payload: platforms } );
     } catch (error) {
       console.log(error)
     }
