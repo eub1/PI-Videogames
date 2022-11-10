@@ -109,7 +109,7 @@ const Home = () => {
           }
           </select>
           </div>
-        <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reload Videogames</button>
+        <button onClick={e =>handleClick(e)} id={s.reloadButton}>Reset filters</button>
         <div className={s.pages_container}>
           {
             videogames?.loading && 
