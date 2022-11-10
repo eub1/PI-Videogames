@@ -54,6 +54,9 @@ const VideogameCreate = () => {
 
   const allNames = allVideogames.map(v => v.name);
 
+  const current = new Date();
+  const today = `${current.getFullYear()}-${current.getMonth()}-${current.getDate()}`
+
   useEffect(()=>{
     dispatch(getPlatforms());
     dispatch(getGenres())
@@ -175,7 +178,7 @@ const VideogameCreate = () => {
         </div>
         <div>
           <label htmlFor='rating'>Rating:</label><br/>
-          <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)} min={0} max ={5}/>
+          <input type="number" value= {input.rating} name= "rating" onChange = {e => handleChange(e)} min={0} max={5}/>
           {errors.rating && (<p className='error'>{errors.rating}</p>)}
         </div>
         <div>
