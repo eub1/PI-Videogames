@@ -5,6 +5,7 @@ const {
   RAWG_API_KEY
 } = process.env;
 
+// nuevo comentario
  //Obtener todos los tipos de géneros de videojuegos posibles, si no lo encuentra, crearlo
 const getAllPlatforms = async () => {
 
